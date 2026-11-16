@@ -43,3 +43,4 @@ Coordinates: EPSG:4326 in all GeoJSON. Distances and areas are computed in EPSG:
 
 ### How `trend_slope` is calculated
 Each patch's `health_index` minus the same-year median of unburned patches, then a straight-line fit over the latest 5 summers. Subtracting the median removes the shared year-to-year (weather) trend. Labels use +/-1.5 points per year as the cutoff.
+This trend has not been validated against reference damage (AUC 0.42 against USFS polygons, exploratory). Describe it as relative change in greenness and moisture, not as a decline in health.

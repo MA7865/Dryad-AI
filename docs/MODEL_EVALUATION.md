@@ -20,7 +20,11 @@ Not applicable: nothing is trained, and the scale is fixed from the unburned ref
 - **Band split:** among 754 scored unburned patches (2026), 12% High stress, 23% Moderate, 65% Healthy, close to the intended 10/20/70 split.
 - **Burned patches:** 1,068 scored, mostly burned patches are labelled Post-fire recovery. 813 of 1,132 mostly burned patches show an improving trend, consistent with regrowth after the 2020 Creek Fire.
 - **Trend sanity:** slopes for unburned patches centre near zero (median 0.1 points per year), so the shared weather trend is removed. 590 of 754 are "Stable vs peers".
-- **USFS overlay (2022-2024, unburned patches):** 94 of 2,262 scored patch-years overlap a USFS damage polygon (10% or more of the patch covered). The same patches recur across years, so the effective sample is smaller. These patches score higher, not lower: mean Health Index 73 vs 42 for the rest (median 74 vs 38), 99% are Healthy, and the AUC for ranking them as more stressed is 0.18 (they rank as healthier about 82% of the time). **The index does not detect the surveyed damage.** Likely reason (not yet verified): the polygons lie in dense mid-elevation conifer forest, which is naturally greener and moister than much of the reference area, and most damage is light (1-10% of trees). The score therefore reflects forest type and density as much as condition.
+- **USFS overlay (exploratory, 2022-2024, unburned patches):** 94 of 2,262 scored patch-years overlap a USFS damage polygon (10% or more of the patch covered). The same patches recur across years and neighbouring polygons overlap in space, so the effective sample is smaller than it looks.
+  - *The score level does not detect damage.* These patches score higher, not lower: mean Health Index 73 vs 42 for the rest, AUC 0.18 for ranking them as more stressed. They sit in denser forest (NDVI 0.63 vs 0.53, tree cover 84% vs 74%). Against unlabelled patches within 2.5 km they score 3.5 points higher on average and only 42% are lower, so there is no local signal either.
+  - *The change in relative score from 2022 to 2024 carries a modest signal.* Ranking the 754 patches by how much their score fell gives an AUC of 0.75 (bootstrap 95% interval 0.70-0.81; 84 patches with a polygon). Polygon patches start higher, so part of this could be regression to the mean. After adjusting for the starting level (fitted on patches without polygons) the AUC is 0.66 (0.60-0.72). The bootstrap treats patches as independent, so the interval is probably too narrow.
+  - *M1's own 5-summer trajectory does not show this signal.* AUC 0.42 (754 patches, 84 with a polygon): no evidence that the trend labels track the surveyed damage.
+  - *Status: exploratory.* The 2022-2024 window was examined after the first check failed, so 0.66 is probably optimistic. It needs an independent test (for example 2025 survey polygons).
 
 ### Limitations
 - A low score means lower greenness and moisture than similar unburned forest, from any cause, including terrain, aspect and canopy type.
@@ -31,3 +35,4 @@ Not applicable: nothing is trained, and the scale is fixed from the unburned ref
 
 ### Known leakage risks
 None in the training sense (no training). The main risk is over-reading the USFS overlay: with few positives and polygons that are themselves approximate, results are indicative only.
+- The change measure and window were chosen after looking at the same 84 labelled patches, and several checks were tried (level, neighbours, change). Treat the results as hypothesis-generating, not confirmed.
