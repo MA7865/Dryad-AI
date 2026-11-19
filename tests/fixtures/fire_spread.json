@@ -1,0 +1,2198 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.4951923087542,
+       37.01096763357308
+      ],
+      [
+       -119.49533961664585,
+       37.01547055304903
+      ],
+      [
+       -119.50095488359092,
+       37.0153522804708
+      ],
+      [
+       -119.50080724505355,
+       37.010849380210225
+      ],
+      [
+       -119.4951923087542,
+       37.01096763357308
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r004_c000",
+    "patch_id": "P_r004_c000",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 0,
+    "perimeter_time": null,
+    "burned_fraction": 0.324
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.48957733972121,
+       37.01108562161526
+      ],
+      [
+       -119.4897243169596,
+       37.01558856026351
+      ],
+      [
+       -119.49533961664585,
+       37.01547055304903
+      ],
+      [
+       -119.4951923087542,
+       37.01096763357308
+      ],
+      [
+       -119.48957733972121,
+       37.01108562161526
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r004_c001",
+    "patch_id": "P_r004_c001",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 4,
+    "perimeter_time": null,
+    "burned_fraction": 0.713
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.49533961664585,
+       37.01547055304903
+      ],
+      [
+       -119.49548695727876,
+       37.01997346859702
+      ],
+      [
+       -119.50110255494283,
+       37.01985517680121
+      ],
+      [
+       -119.50095488359092,
+       37.0153522804708
+      ],
+      [
+       -119.49533961664585,
+       37.01547055304903
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r005_c000",
+    "patch_id": "P_r005_c000",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 6,
+    "perimeter_time": null,
+    "burned_fraction": 0.065
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.4897243169596,
+       37.01558856026351
+      ],
+      [
+       -119.48987132686588,
+       37.02009149498603
+      ],
+      [
+       -119.49548695727876,
+       37.01997346859702
+      ],
+      [
+       -119.49533961664585,
+       37.01547055304903
+      ],
+      [
+       -119.4897243169596,
+       37.01558856026351
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r005_c001",
+    "patch_id": "P_r005_c001",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 7,
+    "perimeter_time": null,
+    "burned_fraction": 0.454
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.48396233802792,
+       37.01120334433191
+      ],
+      [
+       -119.48410898460548,
+       37.01570630210941
+      ],
+      [
+       -119.4897243169596,
+       37.01558856026351
+      ],
+      [
+       -119.48957733972121,
+       37.01108562161526
+      ],
+      [
+       -119.48396233802792,
+       37.01120334433191
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r004_c002",
+    "patch_id": "P_r004_c002",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 10,
+    "perimeter_time": null,
+    "burned_fraction": 1.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.48410898460548,
+       37.01570630210941
+      ],
+      [
+       -119.48425566377756,
+       37.02020925596341
+      ],
+      [
+       -119.48987132686588,
+       37.02009149498603
+      ],
+      [
+       -119.4897243169596,
+       37.01558856026351
+      ],
+      [
+       -119.48410898460548,
+       37.01570630210941
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r005_c002",
+    "patch_id": "P_r005_c002",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 13,
+    "perimeter_time": null,
+    "burned_fraction": 0.68
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.48381572403734,
+       37.0067003826312
+      ],
+      [
+       -119.48396233802792,
+       37.01120334433191
+      ],
+      [
+       -119.48957733972121,
+       37.01108562161526
+      ],
+      [
+       -119.48943039514312,
+       37.00658267904158
+      ],
+      [
+       -119.48381572403734,
+       37.0067003826312
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r003_c002",
+    "patch_id": "P_r003_c002",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 14,
+    "perimeter_time": null,
+    "burned_fraction": 0.68
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.47834730374768,
+       37.01132080171822
+      ],
+      [
+       -119.47849361965685,
+       37.01582377858191
+      ],
+      [
+       -119.48410898460548,
+       37.01570630210941
+      ],
+      [
+       -119.48396233802792,
+       37.01120334433191
+      ],
+      [
+       -119.47834730374768,
+       37.01132080171822
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r004_c003",
+    "patch_id": "P_r004_c003",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 17,
+    "perimeter_time": null,
+    "burned_fraction": 0.907
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.47820102035215,
+       37.00681782093353
+      ],
+      [
+       -119.47834730374768,
+       37.01132080171822
+      ],
+      [
+       -119.48396233802792,
+       37.01120334433191
+      ],
+      [
+       -119.48381572403734,
+       37.0067003826312
+      ],
+      [
+       -119.47820102035215,
+       37.00681782093353
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r003_c003",
+    "patch_id": "P_r003_c003",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 20,
+    "perimeter_time": null,
+    "burned_fraction": 0.842
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.4727322369538,
+       37.011437993769384
+      ],
+      [
+       -119.47287822218703,
+       37.015940989676196
+      ],
+      [
+       -119.47849361965685,
+       37.01582377858191
+      ],
+      [
+       -119.47834730374768,
+       37.01132080171822
+      ],
+      [
+       -119.4727322369538,
+       37.011437993769384
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r004_c004",
+    "patch_id": "P_r004_c004",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 26,
+    "perimeter_time": null,
+    "burned_fraction": 0.907
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.47849361965685,
+       37.01582377858191
+      ],
+      [
+       -119.47863996808717,
+       37.02032675152432
+      ],
+      [
+       -119.48425566377756,
+       37.02020925596341
+      ],
+      [
+       -119.48410898460548,
+       37.01570630210941
+      ],
+      [
+       -119.47849361965685,
+       37.01582377858191
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r005_c003",
+    "patch_id": "P_r005_c003",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 26,
+    "perimeter_time": null,
+    "burned_fraction": 0.842
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.47258628416088,
+       37.00693499394375
+      ],
+      [
+       -119.4727322369538,
+       37.011437993769384
+      ],
+      [
+       -119.47834730374768,
+       37.01132080171822
+      ],
+      [
+       -119.47820102035215,
+       37.00681782093353
+      ],
+      [
+       -119.47258628416088,
+       37.00693499394375
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r003_c004",
+    "patch_id": "P_r003_c004",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 27,
+    "perimeter_time": null,
+    "burned_fraction": 0.745
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.47287822218703,
+       37.015940989676196
+      ],
+      [
+       -119.4730242398681,
+       37.02044398166395
+      ],
+      [
+       -119.47863996808717,
+       37.02032675152432
+      ],
+      [
+       -119.47849361965685,
+       37.01582377858191
+      ],
+      [
+       -119.47287822218703,
+       37.015940989676196
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r005_c004",
+    "patch_id": "P_r005_c004",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 27,
+    "perimeter_time": null,
+    "burned_fraction": 0.94
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.47863996808717,
+       37.02032675152432
+      ],
+      [
+       -119.47878634904622,
+       37.02482972054515
+      ],
+      [
+       -119.48440237555172,
+       37.02471220589361
+      ],
+      [
+       -119.48425566377756,
+       37.02020925596341
+      ],
+      [
+       -119.47863996808717,
+       37.02032675152432
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r006_c003",
+    "patch_id": "P_r006_c003",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 28,
+    "perimeter_time": null,
+    "burned_fraction": 0.356
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46711713771963,
+       37.01155492048057
+      ],
+      [
+       -119.46726279226941,
+       37.01605793538748
+      ],
+      [
+       -119.47287822218703,
+       37.015940989676196
+      ],
+      [
+       -119.4727322369538,
+       37.011437993769384
+      ],
+      [
+       -119.46711713771963,
+       37.01155492048057
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r004_c005",
+    "patch_id": "P_r004_c005",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 33,
+    "perimeter_time": null,
+    "burned_fraction": 1.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.47805476946273,
+       37.00231483622812
+      ],
+      [
+       -119.47820102035215,
+       37.00681782093353
+      ],
+      [
+       -119.48381572403734,
+       37.0067003826312
+      ],
+      [
+       -119.48366914262616,
+       37.00219741700756
+      ],
+      [
+       -119.47805476946273,
+       37.00231483622812
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r002_c003",
+    "patch_id": "P_r002_c003",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 33,
+    "perimeter_time": null,
+    "burned_fraction": 0.194
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.4669715155368,
+       37.00705190165708
+      ],
+      [
+       -119.46711713771963,
+       37.01155492048057
+      ],
+      [
+       -119.4727322369538,
+       37.011437993769384
+      ],
+      [
+       -119.47258628416088,
+       37.00693499394375
+      ],
+      [
+       -119.4669715155368,
+       37.00705190165708
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r003_c005",
+    "patch_id": "P_r003_c005",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 34,
+    "perimeter_time": null,
+    "burned_fraction": 0.972
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46726279226941,
+       37.01605793538748
+      ],
+      [
+       -119.46740847919365,
+       37.020560946377515
+      ],
+      [
+       -119.4730242398681,
+       37.02044398166395
+      ],
+      [
+       -119.47287822218703,
+       37.015940989676196
+      ],
+      [
+       -119.46726279226941,
+       37.01605793538748
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r005_c005",
+    "patch_id": "P_r005_c005",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 35,
+    "perimeter_time": null,
+    "burned_fraction": 1.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.47244036380073,
+       37.00243199019963
+      ],
+      [
+       -119.47258628416088,
+       37.00693499394375
+      ],
+      [
+       -119.47820102035215,
+       37.00681782093353
+      ],
+      [
+       -119.47805476946273,
+       37.00231483622812
+      ],
+      [
+       -119.47244036380073,
+       37.00243199019963
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r002_c004",
+    "patch_id": "P_r002_c004",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 35,
+    "perimeter_time": null,
+    "burned_fraction": 0.551
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.4730242398681,
+       37.02044398166395
+      ],
+      [
+       -119.47317029000446,
+       37.02494696973234
+      ],
+      [
+       -119.47878634904622,
+       37.02482972054515
+      ],
+      [
+       -119.47863996808717,
+       37.02032675152432
+      ],
+      [
+       -119.4730242398681,
+       37.02044398166395
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r006_c004",
+    "patch_id": "P_r006_c004",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 35,
+    "perimeter_time": null,
+    "burned_fraction": 0.648
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46150200611848,
+       37.01167158184704
+      ],
+      [
+       -119.46164732997731,
+       37.01617461571096
+      ],
+      [
+       -119.46726279226941,
+       37.01605793538748
+      ],
+      [
+       -119.46711713771963,
+       37.01155492048057
+      ],
+      [
+       -119.46150200611848,
+       37.01167158184704
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r004_c006",
+    "patch_id": "P_r004_c006",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 39,
+    "perimeter_time": null,
+    "burned_fraction": 0.778
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46682592571345,
+       37.002548878917295
+      ],
+      [
+       -119.4669715155368,
+       37.00705190165708
+      ],
+      [
+       -119.47258628416088,
+       37.00693499394375
+      ],
+      [
+       -119.47244036380073,
+       37.00243199019963
+      ],
+      [
+       -119.46682592571345,
+       37.002548878917295
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r002_c005",
+    "patch_id": "P_r002_c005",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 39,
+    "perimeter_time": null,
+    "burned_fraction": 1.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46740847919365,
+       37.020560946377515
+      ],
+      [
+       -119.46755419849987,
+       37.0250639534504
+      ],
+      [
+       -119.47317029000446,
+       37.02494696973234
+      ],
+      [
+       -119.4730242398681,
+       37.02044398166395
+      ],
+      [
+       -119.46740847919365,
+       37.020560946377515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r006_c005",
+    "patch_id": "P_r006_c005",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 41,
+    "perimeter_time": null,
+    "burned_fraction": 0.972
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46135671455328,
+       37.007168544068726
+      ],
+      [
+       -119.46150200611848,
+       37.01167158184704
+      ],
+      [
+       -119.46711713771963,
+       37.01155492048057
+      ],
+      [
+       -119.4669715155368,
+       37.00705190165708
+      ],
+      [
+       -119.46135671455328,
+       37.007168544068726
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r003_c006",
+    "patch_id": "P_r003_c006",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 41,
+    "perimeter_time": null,
+    "burned_fraction": 0.713
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46121145527422,
+       37.00266550237632
+      ],
+      [
+       -119.46135671455328,
+       37.007168544068726
+      ],
+      [
+       -119.4669715155368,
+       37.00705190165708
+      ],
+      [
+       -119.46682592571345,
+       37.002548878917295
+      ],
+      [
+       -119.46121145527422,
+       37.00266550237632
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r002_c006",
+    "patch_id": "P_r002_c006",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 42,
+    "perimeter_time": null,
+    "burned_fraction": 0.94
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46164732997731,
+       37.01617461571096
+      ],
+      [
+       -119.46179268613723,
+       37.020677645660214
+      ],
+      [
+       -119.46740847919365,
+       37.020560946377515
+      ],
+      [
+       -119.46726279226941,
+       37.01605793538748
+      ],
+      [
+       -119.46164732997731,
+       37.01617461571096
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r005_c006",
+    "patch_id": "P_r005_c006",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 45,
+    "perimeter_time": null,
+    "burned_fraction": 0.81
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.47317029000446,
+       37.02494696973234
+      ],
+      [
+       -119.47331637260372,
+       37.02944995388108
+      ],
+      [
+       -119.47893276254152,
+       37.02933268564411
+      ],
+      [
+       -119.47878634904622,
+       37.02482972054515
+      ],
+      [
+       -119.47317029000446,
+       37.02494696973234
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r007_c004",
+    "patch_id": "P_r007_c004",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 45,
+    "perimeter_time": null,
+    "burned_fraction": 0.227
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45588684222372,
+       37.01178797786398
+      ],
+      [
+       -119.45603183538411,
+       37.01629103064186
+      ],
+      [
+       -119.46164732997731,
+       37.01617461571096
+      ],
+      [
+       -119.46150200611848,
+       37.01167158184704
+      ],
+      [
+       -119.45588684222372,
+       37.01178797786398
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r004_c007",
+    "patch_id": "P_r004_c007",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 45,
+    "perimeter_time": null,
+    "burned_fraction": 1.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46668036824205,
+       36.9980458522615
+      ],
+      [
+       -119.46682592571345,
+       37.002548878917295
+      ],
+      [
+       -119.47244036380073,
+       37.00243199019963
+      ],
+      [
+       -119.47229447586585,
+       36.997928982537296
+      ],
+      [
+       -119.46668036824205,
+       36.9980458522615
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r001_c005",
+    "patch_id": "P_r001_c005",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 45,
+    "perimeter_time": null,
+    "burned_fraction": 0.454
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46755419849987,
+       37.0250639534504
+      ],
+      [
+       -119.46769995019552,
+       37.029566956605834
+      ],
+      [
+       -119.47331637260372,
+       37.02944995388108
+      ],
+      [
+       -119.47317029000446,
+       37.02494696973234
+      ],
+      [
+       -119.46755419849987,
+       37.0250639534504
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r007_c005",
+    "patch_id": "P_r007_c005",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 45,
+    "perimeter_time": null,
+    "burned_fraction": 0.551
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45574188128361,
+       37.007284921173905
+      ],
+      [
+       -119.45588684222372,
+       37.01178797786398
+      ],
+      [
+       -119.46150200611848,
+       37.01167158184704
+      ],
+      [
+       -119.46135671455328,
+       37.007168544068726
+      ],
+      [
+       -119.45574188128361,
+       37.007284921173905
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r003_c007",
+    "patch_id": "P_r003_c007",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 47,
+    "perimeter_time": null,
+    "burned_fraction": 0.907
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45559695255632,
+       37.00278186057193
+      ],
+      [
+       -119.45574188128361,
+       37.007284921173905
+      ],
+      [
+       -119.46135671455328,
+       37.007168544068726
+      ],
+      [
+       -119.46121145527422,
+       37.00266550237632
+      ],
+      [
+       -119.45559695255632,
+       37.00278186057193
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r002_c007",
+    "patch_id": "P_r002_c007",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 47,
+    "perimeter_time": null,
+    "burned_fraction": 1.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45603183538411,
+       37.01629103064186
+      ],
+      [
+       -119.45617686077223,
+       37.02079407950726
+      ],
+      [
+       -119.46179268613723,
+       37.020677645660214
+      ],
+      [
+       -119.46164732997731,
+       37.01617461571096
+      ],
+      [
+       -119.45603183538411,
+       37.01629103064186
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r005_c007",
+    "patch_id": "P_r005_c007",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 47,
+    "perimeter_time": null,
+    "burned_fraction": 1.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46106622827382,
+       36.998162456770096
+      ],
+      [
+       -119.46121145527422,
+       37.00266550237632
+      ],
+      [
+       -119.46682592571345,
+       37.002548878917295
+      ],
+      [
+       -119.46668036824205,
+       36.9980458522615
+      ],
+      [
+       -119.46106622827382,
+       36.998162456770096
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r001_c006",
+    "patch_id": "P_r001_c006",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 49,
+    "perimeter_time": null,
+    "burned_fraction": 0.81
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46179268613723,
+       37.020677645660214
+      ],
+      [
+       -119.46193807460577,
+       37.02518067169451
+      ],
+      [
+       -119.46755419849987,
+       37.0250639534504
+      ],
+      [
+       -119.46740847919365,
+       37.020560946377515
+      ],
+      [
+       -119.46179268613723,
+       37.020677645660214
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r006_c006",
+    "patch_id": "P_r006_c006",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 49,
+    "perimeter_time": null,
+    "burned_fraction": 0.713
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.46193807460577,
+       37.02518067169451
+      ],
+      [
+       -119.46208349539036,
+       37.02968369381357
+      ],
+      [
+       -119.46769995019552,
+       37.029566956605834
+      ],
+      [
+       -119.46755419849987,
+       37.0250639534504
+      ],
+      [
+       -119.46193807460577,
+       37.02518067169451
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r007_c006",
+    "patch_id": "P_r007_c006",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 52,
+    "perimeter_time": null,
+    "burned_fraction": 0.875
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45041630856316,
+       37.01640718017542
+      ],
+      [
+       -119.45056100317204,
+       37.0209102479139
+      ],
+      [
+       -119.45617686077223,
+       37.02079407950726
+      ],
+      [
+       -119.45603183538411,
+       37.01629103064186
+      ],
+      [
+       -119.45041630856316,
+       37.01640718017542
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r005_c008",
+    "patch_id": "P_r005_c008",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 53,
+    "perimeter_time": null,
+    "burned_fraction": 0.81
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.44998241763307,
+       37.00289795349937
+      ],
+      [
+       -119.45012701580114,
+       37.007401032967856
+      ],
+      [
+       -119.45574188128361,
+       37.007284921173905
+      ],
+      [
+       -119.45559695255632,
+       37.00278186057193
+      ],
+      [
+       -119.44998241763307,
+       37.00289795349937
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r002_c008",
+    "patch_id": "P_r002_c008",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 54,
+    "perimeter_time": null,
+    "burned_fraction": 0.94
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45012701580114,
+       37.007401032967856
+      ],
+      [
+       -119.45027164610869,
+       37.01190410852665
+      ],
+      [
+       -119.45588684222372,
+       37.01178797786398
+      ],
+      [
+       -119.45574188128361,
+       37.007284921173905
+      ],
+      [
+       -119.45012701580114,
+       37.007401032967856
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r003_c008",
+    "patch_id": "P_r003_c008",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 54,
+    "perimeter_time": null,
+    "burned_fraction": 0.616
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45027164610869,
+       37.01190410852665
+      ],
+      [
+       -119.45041630856316,
+       37.01640718017542
+      ],
+      [
+       -119.45603183538411,
+       37.01629103064186
+      ],
+      [
+       -119.45588684222372,
+       37.01178797786398
+      ],
+      [
+       -119.45027164610869,
+       37.01190410852665
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r004_c008",
+    "patch_id": "P_r004_c008",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 54,
+    "perimeter_time": null,
+    "burned_fraction": 0.907
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45545205603439,
+       36.99827879605834
+      ],
+      [
+       -119.45559695255632,
+       37.00278186057193
+      ],
+      [
+       -119.46121145527422,
+       37.00266550237632
+      ],
+      [
+       -119.46106622827382,
+       36.998162456770096
+      ],
+      [
+       -119.45545205603439,
+       36.99827879605834
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r001_c007",
+    "patch_id": "P_r001_c007",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 56,
+    "perimeter_time": null,
+    "burned_fraction": 0.907
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45617686077223,
+       37.02079407950726
+      ],
+      [
+       -119.45632191839557,
+       37.02529712445992
+      ],
+      [
+       -119.46193807460577,
+       37.02518067169451
+      ],
+      [
+       -119.46179268613723,
+       37.020677645660214
+      ],
+      [
+       -119.45617686077223,
+       37.02079407950726
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r006_c007",
+    "patch_id": "P_r006_c007",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 57,
+    "perimeter_time": null,
+    "burned_fraction": 0.875
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45632191839557,
+       37.02529712445992
+      ],
+      [
+       -119.45646700826163,
+       37.02980016549951
+      ],
+      [
+       -119.46208349539036,
+       37.02968369381357
+      ],
+      [
+       -119.46193807460577,
+       37.02518067169451
+      ],
+      [
+       -119.45632191839557,
+       37.02529712445992
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r007_c007",
+    "patch_id": "P_r007_c007",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 57,
+    "perimeter_time": null,
+    "burned_fraction": 0.745
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.44451211817919,
+       37.00751687944583
+      ],
+      [
+       -119.4446564178467,
+       37.012019973830256
+      ],
+      [
+       -119.45027164610869,
+       37.01190410852665
+      ],
+      [
+       -119.45012701580114,
+       37.007401032967856
+      ],
+      [
+       -119.44451211817919,
+       37.00751687944583
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r003_c009",
+    "patch_id": "P_r003_c009",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 60,
+    "perimeter_time": null,
+    "burned_fraction": 0.292
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.4446564178467,
+       37.012019973830256
+      ],
+      [
+       -119.44480074958783,
+       37.01652306430687
+      ],
+      [
+       -119.45041630856316,
+       37.01640718017542
+      ],
+      [
+       -119.45027164610869,
+       37.01190410852665
+      ],
+      [
+       -119.4446564178467,
+       37.012019973830256
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r004_c009",
+    "patch_id": "P_r004_c009",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 60,
+    "perimeter_time": null,
+    "burned_fraction": 0.616
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.44436785057779,
+       37.00301378115389
+      ],
+      [
+       -119.44451211817919,
+       37.00751687944583
+      ],
+      [
+       -119.45012701580114,
+       37.007401032967856
+      ],
+      [
+       -119.44998241763307,
+       37.00289795349937
+      ],
+      [
+       -119.44436785057779,
+       37.00301378115389
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r002_c009",
+    "patch_id": "P_r002_c009",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 61,
+    "perimeter_time": null,
+    "burned_fraction": 0.454
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45646700826163,
+       37.02980016549951
+      ],
+      [
+       -119.45661213037782,
+       37.03430320262578
+      ],
+      [
+       -119.46222894849856,
+       37.03418671201709
+      ],
+      [
+       -119.46208349539036,
+       37.02968369381357
+      ],
+      [
+       -119.45646700826163,
+       37.02980016549951
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r008_c007",
+    "patch_id": "P_r008_c007",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 61,
+    "perimeter_time": null,
+    "burned_fraction": 0.032
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.44480074958783,
+       37.01652306430687
+      ],
+      [
+       -119.44494511340997,
+       37.021026150875365
+      ],
+      [
+       -119.45056100317204,
+       37.0209102479139
+      ],
+      [
+       -119.45041630856316,
+       37.01640718017542
+      ],
+      [
+       -119.44480074958783,
+       37.01652306430687
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r005_c009",
+    "patch_id": "P_r005_c009",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 61,
+    "perimeter_time": null,
+    "burned_fraction": 0.421
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.44983785159704,
+       36.99839487012145
+      ],
+      [
+       -119.44998241763307,
+       37.00289795349937
+      ],
+      [
+       -119.45559695255632,
+       37.00278186057193
+      ],
+      [
+       -119.45545205603439,
+       36.99827879605834
+      ],
+      [
+       -119.44983785159704,
+       36.99839487012145
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r001_c008",
+    "patch_id": "P_r001_c008",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 62,
+    "perimeter_time": null,
+    "burned_fraction": 0.324
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.44494511340997,
+       37.021026150875365
+      ],
+      [
+       -119.44508950932057,
+       37.025529233535494
+      ],
+      [
+       -119.45070572994271,
+       37.02541331174183
+      ],
+      [
+       -119.45056100317204,
+       37.0209102479139
+      ],
+      [
+       -119.44494511340997,
+       37.021026150875365
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r006_c009",
+    "patch_id": "P_r006_c009",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 63,
+    "perimeter_time": null,
+    "burned_fraction": 0.065
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -119.45056100317204,
+       37.0209102479139
+      ],
+      [
+       -119.45070572994271,
+       37.02541331174183
+      ],
+      [
+       -119.45632191839557,
+       37.02529712445992
+      ],
+      [
+       -119.45617686077223,
+       37.02079407950726
+      ],
+      [
+       -119.45056100317204,
+       37.0209102479139
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "feature_id": "fire_spread:P_r006_c008",
+    "patch_id": "P_r006_c008",
+    "layer_type": "fire_spread",
+    "observed_at": null,
+    "generated_at": "2026-11-18T00:00:00Z",
+    "model_version": "m4-spread-0.1",
+    "source": "simulation:ca-v1a",
+    "data_quality": "simulated",
+    "simulation_step": 64,
+    "perimeter_time": null,
+    "burned_fraction": 0.065
+   }
+  }
+ ]
+}
