@@ -55,7 +55,4 @@ Everything the click panel needs for one patch, including its score for each sum
 - "Post-fire recovery" means more than half the patch burned since 2015. The score reflects regrowth, not disease. Use a colour different from the stress colours.
 - Data is rebuilt offline (`python -m modules.forest_health.build_outputs`), so values change only when the outputs are regenerated.
 - Trend labels describe change relative to similar patches. They have not been shown to track surveyed damage, so do not present them as disease or decline warnings.
-findstr /s /i "<<FILL" docs\*.md
-git add docs
-git commit -m "M1: add USFS validation results to docs"
-git push
+
