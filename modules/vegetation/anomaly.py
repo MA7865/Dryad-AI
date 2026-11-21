@@ -1,0 +1,1 @@
+"""Vegetation anomaly detection utilities."""
