@@ -14,3 +14,6 @@ LATEST = CACHE / "m1_forest_health_latest.geojson"
 HISTORY = CACHE / "m1_patch_history.json"
 LIVE = CACHE / "m1_forest_health_live.geojson"
 LIVE_META = CACHE / "m1_live_meta.json"
+
+MODEL_FILE = ROOT / "models" / "m1_mortality_hgb.joblib"
+MODEL_CARD = CONFIG / "m1_model_card.json"

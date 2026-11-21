@@ -10,13 +10,26 @@ from collections import Counter
 from datetime import date, datetime, timedelta, timezone
 
 from . import live_gee
-from .build_outputs import health_int, rnd
+from .build_outputs import clean, health_int, rnd
 from .paths import CACHE, GRID, LIVE, LIVE_META
 from .scoring import score_table
 
 MIN_OBS = 3            # fewer clear observations per pixel than this = "limited"
 MODEL_VERSION = "m1-index-v1-live"
 SOURCE = "Sentinel-2 SR Harmonized (live window); ESA WorldCover v200; MODIS MCD64A1"
+
+
+def _model_scores():
+    """Mortality-likelihood scores for the latest completed summer. Never raises."""
+    try:
+        from . import model_service
+        res = model_service.score_patches()
+        if res is None:
+            return {}, {"status": "model_not_installed"}
+        out, meta = res
+        return out.set_index("patch_id").to_dict("index"), meta
+    except Exception as exc:
+        return {}, {"status": f"model_error: {type(exc).__name__}: {exc}"[:200]}
 
 
 def build_live(days: int = 30):
@@ -27,11 +40,12 @@ def build_live(days: int = 30):
     df = live_gee.fetch_window_features(start, end)
     n_scenes = df.attrs["n_scenes"]
 
-    # Scored against the unburned patches in THIS window (peer-relative), so the
-    # seasonal shift common to the whole area cancels out.
+    # Index: scored against the unburned patches in THIS window (peer-relative)
     scored, _, bounds = score_table(df)
     low_obs = scored["obs_count"].fillna(0) < MIN_OBS
     scored.loc[(scored["data_quality"] == "good") & low_obs, "data_quality"] = "limited"
+
+    mscores, mmeta = _model_scores()
 
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     live = scored.set_index("patch_id")
@@ -39,6 +53,8 @@ def build_live(days: int = 30):
     for f in json.loads(GRID.read_text())["features"]:
         gp = f["properties"]
         r = live.loc[gp["patch_id"]]
+        mrow = mscores.get(gp["patch_id"], {})
+        band = mrow.get("mortality_band")
         props = {
             "patch_id": gp["patch_id"], "row": gp["row"], "col": gp["col"],
             "center_lon": gp["center_lon"], "center_lat": gp["center_lat"],
@@ -54,6 +70,12 @@ def build_live(days: int = 30):
             "forest_frac": rnd(r["forest_frac"], 2),
             "obs_count": rnd(r["obs_count"], 1),
             "data_quality": r["data_quality"],
+            "mortality_likelihood": clean(mrow.get("mortality_likelihood")),
+            "mortality_band": band if isinstance(band, str) else None,
+            "model_status": mrow.get("model_status", mmeta.get("status", "model_not_available")),
+            "mortality_model_version": mmeta.get("model_version"),
+            "mortality_model_window": mmeta.get("window"),
+            "mortality_climate_year": mmeta.get("climate_year"),
         }
         features.append({"type": "Feature", "geometry": f["geometry"], "properties": props})
 
@@ -65,6 +87,7 @@ def build_live(days: int = 30):
         "scored_patches": int(scored["health_index"].notna().sum()),
         "reference": "unburned patches in the same window",
         "reference_bounds": {k: list(v) for k, v in bounds.items()},
+        "mortality_model": mmeta,
     }
     return layer, meta
 
@@ -79,9 +102,13 @@ def main() -> None:
     LIVE_META.write_text(json.dumps(meta, indent=2))
     props = [f["properties"] for f in layer["features"]]
     print(f"Window {meta['window_start']} to {meta['window_end']} | scenes {meta['n_scenes']} "
-          f"| scored {meta['scored_patches']}")
-    print("Bands:", dict(Counter(p["health_band"] for p in props)))
+          f"| index scored {meta['scored_patches']}")
+    print("Index bands:", dict(Counter(p["health_band"] for p in props)))
     print("Quality:", dict(Counter(p["data_quality"] for p in props)))
+    print("Mortality model:", meta["mortality_model"].get("status"),
+          "| window", meta["mortality_model"].get("window"))
+    print("Model status:", dict(Counter(p["model_status"] for p in props)))
+    print("Mortality bands:", dict(Counter(p["mortality_band"] for p in props)))
     print("Wrote", LIVE.name, "and", LIVE_META.name, "in", CACHE)
 
 

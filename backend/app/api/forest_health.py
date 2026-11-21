@@ -35,6 +35,13 @@ def forest_health_status() -> dict:
     """When each forest-health layer was built (for a 'last refresh' display)."""
     return interface.get_status()
 
+@router.get("/layers/forest-health/model-card")
+def forest_health_model_card() -> dict:
+    """Training data, metrics, calibration and limits of the mortality-likelihood model."""
+    try:
+        return interface.get_model_card()
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Model card not built. Run: python -m scripts.train_final")
 
 @router.get("/patches/{patch_id}/forest-health", response_model=ForestHealthPatch)
 def forest_health_patch(patch_id: str):
