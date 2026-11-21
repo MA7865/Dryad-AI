@@ -14,7 +14,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 GRID = ROOT / "data" / "grid.geojson"
-PROJECT = "gen-lang-client-0751448138"   # Earth Engine project (change to yours)
+PROJECT = os.getenv("EE_PROJECT", "gen-lang-client-0751448138")   # teammates set EE_PROJECT to their own  # Earth Engine project (change to yours)
 S2 = "COPERNICUS/S2_SR_HARMONIZED"
 _initialised = False
 

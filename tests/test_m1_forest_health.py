@@ -48,3 +48,9 @@ def test_status_endpoint():
 
 def test_live_layer_is_ready_or_not_yet():
     assert client.get("/api/v1/layers/forest-health?period=live").status_code in (200, 503)
+
+def test_model_card_endpoint():
+    r = client.get("/api/v1/layers/forest-health/model-card")
+    assert r.status_code in (200, 404)
+    if r.status_code == 200:
+        assert "evaluation" in r.json()

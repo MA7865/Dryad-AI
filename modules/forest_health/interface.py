@@ -11,11 +11,14 @@ import json
 from functools import lru_cache
 
 from . import live_service
-from .paths import HISTORY, LATEST
+from .paths import HISTORY, LATEST, MODEL_CARD
 
 SCALE_NOTE = " The score is relative to unburned forest in the Shaver Lake area, not an absolute measure of tree health."
 LIVE_NOTE = ("Latest satellite window. The score is relative to unburned patches in the same window, "
              "so it is not directly comparable with the summer score. Fewer clear observations means lower reliability.")
+MODEL_NOTE = ("Relative likelihood that USFS aerial surveys would map tree mortality in this patch, from a model trained "
+              "on Sierra-wide survey polygons. It is driven mostly by terrain and climate; satellite data adds a small gain. "
+              "It is not a real-world probability and not a diagnosis.")
 EXPLAIN = {
     "Healthy": "Greenness and moisture are within the normal range of unburned forest in this area (not among the lowest 30%).",
     "Moderate stress": "Greenness and moisture are lower than roughly 70-90% of unburned forest in this area.",
@@ -100,8 +103,11 @@ def get_patch(patch_id: str) -> dict | None:
     if lp is not None:
         live = {k: lp[k] for k in ("window_start", "window_end", "observed_at", "health_index",
                                    "health_band", "ndvi", "ndmi", "obs_count", "data_quality")}
+        for k in ("mortality_likelihood", "mortality_band", "model_status",
+                  "mortality_model_version", "mortality_model_window","mortality_climate_year"):
+            live[k] = lp.get(k)
         live["note"] = LIVE_NOTE
-
+        live["model_note"] = MODEL_NOTE
     return {
         "patch_id": patch_id, "year": p["year"], "period": p["period"],
         "health_index": p["health_index"], "health_band": p["health_band"],
@@ -114,6 +120,10 @@ def get_patch(patch_id: str) -> dict | None:
         "live": live,
     }
 
+def get_model_card() -> dict:
+    if not MODEL_CARD.exists():
+        raise FileNotFoundError(MODEL_CARD.name)
+    return json.loads(MODEL_CARD.read_text())
 
 def reload_data() -> None:
     for fn in (_layer, _history, _props_by_patch):
