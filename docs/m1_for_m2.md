@@ -17,18 +17,19 @@ Status: [branch m1/forest-health, pull request OPEN / MERGED - fill in]. Last up
 
 ## 2. Results so far
 
-Model tested on map areas and years it never saw (labels: USFS aerial-survey mortality polygons, 52,324 labelled patch-years, 24.8% positive):
+Labels: USFS aerial-survey mortality polygons (15,457, 2021-2024). 51,641 labelled patch-years (24.9% positive) outside Shaver Lake were used for training; Shaver Lake was never used.
 
-| Test | Environment only | + satellite (deployed) |
-|---|---|---|
-| Whole 20 km blocks held out (AUC) | 0.767 | 0.777 (gain +0.007 to +0.014) |
-| New blocks and new year 2024 (AUC) | 0.711 | 0.727 (gain interval includes 0) |
-| Shaver Lake, never seen (AUC; 683 cells, 99 positives) | 0.629 | 0.637 |
+| Test | Result |
+|---|---|
+| Whole 20 km blocks held out (AUC) | 0.783 (95% 0.766-0.796) |
+| New blocks and new year 2024, environment-only vs deployed features | 0.711 vs 0.727 (gain interval includes 0) |
+| Shaver Lake, never seen (AUC; 683 cells, 99 positives) | 0.706 |
 
-- Top 10% of patches flagged: 71-73% were mapped as damaged versus a 27% base rate (whole-block test).
-- **Most of the skill comes from terrain, forest cover and climate.** Satellite features add a small gain. Read the output as "where mortality is likely", not as detected damage.
-- The raw index level did not flag surveyed damage in the 22-polygon Shaver box (AUC 0.18): damaged patches were denser, greener forest. M1's 5-summer trend has not been validated (AUC 0.42 on that box).
-- Prithvi-EO-2.0 (300M, temporal+location version) loads and runs fast (Kaggle GPU 0.06-0.09 s per 7 km tile, CPU 1.7 s). A comparison against hand-built features was not run for this submission.
+- Top 10% of patches flagged: 69% were mapped as damaged versus 25% base rate. High + Elevated (30% of patches) catches about 60% of mapped damage.
+- Calibration within about 0.02 across deciles. Most skill comes from elevation, climate and tree cover; satellite features add about +0.01 AUC.
+- The raw index level does not flag surveyed damage (AUC 0.18 in the 22-polygon box). The 5-summer trend is weak (AUC 0.54 before the survey year, 0.61 including it): treat it as context.
+- Climate inputs use the latest year TerraClimate has (it lags real time); the API reports which year (`mortality_climate_year`).
+- Prithvi-EO-2.0 loads and runs fast; no comparison was run.
 
 ## 3. What you can reuse
 
