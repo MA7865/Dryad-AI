@@ -1,0 +1,359 @@
+{
+  "model_version": "m1-mortality-hgb-v1",
+  "generated_at": "2026-11-21T12:14:49Z",
+  "algorithm": "HistGradientBoostingClassifier (scikit-learn 1.9.1)",
+  "target": "A 500 m patch is positive in a year if USFS aerial-survey MORTALITY polygons cover at least 10% of it that year.",
+  "features": [
+    "elev",
+    "slope",
+    "asp_sin",
+    "asp_cos",
+    "forest_frac",
+    "def_wy",
+    "def_wy_prev",
+    "pdsi_jjas",
+    "NDVI",
+    "NDMI",
+    "NBR",
+    "NDVI_sd",
+    "NDMI_sd",
+    "dNDVI",
+    "dNDMI",
+    "dNBR"
+  ],
+  "feature_notes": {
+    "elev": "Elevation (m), SRTM",
+    "slope": "Slope (degrees), SRTM",
+    "asp_sin": "Aspect, sine component (east-west)",
+    "asp_cos": "Aspect, cosine component (north-south)",
+    "forest_frac": "Share of the patch that is tree cover (ESA WorldCover 2021)",
+    "def_wy": "Climatic water deficit summed over the water year Oct-Sep (TerraClimate, raw units)",
+    "def_wy_prev": "Same, for the previous water year",
+    "pdsi_jjas": "Palmer Drought Severity Index, mean June-September (TerraClimate, raw units, scale 0.01)",
+    "NDVI": "Mean NDVI of tree pixels, June-September median composite (Sentinel-2)",
+    "NDMI": "Mean NDMI (canopy moisture) of tree pixels",
+    "NBR": "Mean NBR of tree pixels",
+    "NDVI_sd": "Spread of NDVI inside the patch (patchy dieback raises it)",
+    "NDMI_sd": "Spread of NDMI inside the patch",
+    "dNDVI": "NDVI minus the previous summer",
+    "dNDMI": "NDMI minus the previous summer",
+    "dNBR": "NBR minus the previous summer"
+  },
+  "training": {
+    "rows": 51641,
+    "positives": 12859,
+    "years": "2021-2024",
+    "spatial_blocks_20km": 238,
+    "negatives": "cells within 3 km of a survey polygon of that year and under 1% covered",
+    "excluded": [
+      "burned (more than 5% since 2015)",
+      "tree cover under 20%",
+      "fewer than 3 clear observations",
+      "1-10% polygon coverage (ambiguous)"
+    ],
+    "shaver_lake_in_training": false
+  },
+  "evaluation": {
+    "whole_blocks_held_out_out_of_fold_2021_2024": {
+      "n": 51641,
+      "positives": 12859,
+      "base_rate": 0.249,
+      "auc": 0.783,
+      "pr_auc": 0.566,
+      "precision_top10pct": 0.687,
+      "auc_95ci": [
+        0.766,
+        0.796
+      ]
+    },
+    "by_year_out_of_fold": {
+      "2021": {
+        "n": 11132,
+        "positives": 2069,
+        "base_rate": 0.186,
+        "auc": 0.718,
+        "pr_auc": 0.339,
+        "precision_top10pct": 0.394
+      },
+      "2022": {
+        "n": 15628,
+        "positives": 4709,
+        "base_rate": 0.301,
+        "auc": 0.768,
+        "pr_auc": 0.583,
+        "precision_top10pct": 0.706
+      },
+      "2023": {
+        "n": 14144,
+        "positives": 4161,
+        "base_rate": 0.294,
+        "auc": 0.801,
+        "pr_auc": 0.651,
+        "precision_top10pct": 0.796
+      },
+      "2024": {
+        "n": 10737,
+        "positives": 1920,
+        "base_rate": 0.179,
+        "auc": 0.794,
+        "pr_auc": 0.493,
+        "precision_top10pct": 0.578
+      }
+    },
+    "baseline_experiments": {
+      "space_test_blocks_held_out_2021_2023": {
+        "1_environment_only": {
+          "n": 40904,
+          "positives": 10939,
+          "base_rate": 0.267,
+          "auc": 0.767,
+          "pr_auc": 0.57,
+          "precision_top10pct": 0.709,
+          "auc_95ci": [
+            0.748,
+            0.782
+          ]
+        },
+        "2_option_A": {
+          "n": 40904,
+          "positives": 10939,
+          "base_rate": 0.267,
+          "auc": 0.777,
+          "pr_auc": 0.586,
+          "precision_top10pct": 0.727,
+          "auc_95ci": [
+            0.76,
+            0.792
+          ]
+        },
+        "auc_gain_A_over_env_95ci": [
+          0.007,
+          0.014
+        ]
+      },
+      "strict_test_new_blocks_and_2024": {
+        "1_environment_only": {
+          "n": 2049,
+          "positives": 364,
+          "base_rate": 0.178,
+          "auc": 0.711,
+          "pr_auc": 0.32,
+          "precision_top10pct": 0.343,
+          "auc_95ci": [
+            0.656,
+            0.763
+          ]
+        },
+        "2_option_A": {
+          "n": 2049,
+          "positives": 364,
+          "base_rate": 0.178,
+          "auc": 0.727,
+          "pr_auc": 0.32,
+          "precision_top10pct": 0.338,
+          "auc_95ci": [
+            0.671,
+            0.779
+          ]
+        },
+        "auc_gain_A_over_env_95ci": [
+          -0.016,
+          0.045
+        ]
+      },
+      "shaver_lake_never_seen_baseline": {
+        "1_environment_only": {
+          "n": 683,
+          "positives": 99,
+          "base_rate": 0.145,
+          "auc": 0.629,
+          "pr_auc": 0.201,
+          "precision_top10pct": 0.235
+        },
+        "2_option_A": {
+          "n": 683,
+          "positives": 99,
+          "base_rate": 0.145,
+          "auc": 0.637,
+          "pr_auc": 0.232,
+          "precision_top10pct": 0.309
+        }
+      }
+    },
+    "shaver_lake_never_seen_deployed_model": {
+      "n": 683,
+      "positives": 99,
+      "base_rate": 0.145,
+      "auc": 0.709,
+      "pr_auc": 0.251,
+      "precision_top10pct": 0.294
+    }
+  },
+  "bands": {
+    "elevated": 0.3047543758852443,
+    "high": 0.5673112704323918,
+    "table": {
+      "High": {
+        "n": 5165,
+        "share_of_cells": 0.1,
+        "observed_damage_rate": 0.687
+      },
+      "Elevated": {
+        "n": 10328,
+        "share_of_cells": 0.2,
+        "observed_damage_rate": 0.41
+      },
+      "Lower": {
+        "n": 36148,
+        "share_of_cells": 0.7,
+        "observed_damage_rate": 0.14
+      }
+    }
+  },
+  "calibration_deciles": [
+    {
+      "decile": 0,
+      "mean_predicted": 0.03,
+      "observed_rate": 0.035,
+      "n": 5165
+    },
+    {
+      "decile": 1,
+      "mean_predicted": 0.059,
+      "observed_rate": 0.067,
+      "n": 5164
+    },
+    {
+      "decile": 2,
+      "mean_predicted": 0.085,
+      "observed_rate": 0.1,
+      "n": 5164
+    },
+    {
+      "decile": 3,
+      "mean_predicted": 0.116,
+      "observed_rate": 0.122,
+      "n": 5164
+    },
+    {
+      "decile": 4,
+      "mean_predicted": 0.154,
+      "observed_rate": 0.17,
+      "n": 5164
+    },
+    {
+      "decile": 5,
+      "mean_predicted": 0.202,
+      "observed_rate": 0.214,
+      "n": 5164
+    },
+    {
+      "decile": 6,
+      "mean_predicted": 0.266,
+      "observed_rate": 0.276,
+      "n": 5164
+    },
+    {
+      "decile": 7,
+      "mean_predicted": 0.353,
+      "observed_rate": 0.354,
+      "n": 5164
+    },
+    {
+      "decile": 8,
+      "mean_predicted": 0.482,
+      "observed_rate": 0.466,
+      "n": 5164
+    },
+    {
+      "decile": 9,
+      "mean_predicted": 0.702,
+      "observed_rate": 0.687,
+      "n": 5164
+    }
+  ],
+  "permutation_importance": [
+    {
+      "feature": "elev",
+      "auc_drop": 0.1567
+    },
+    {
+      "feature": "def_wy",
+      "auc_drop": 0.1099
+    },
+    {
+      "feature": "forest_frac",
+      "auc_drop": 0.0282
+    },
+    {
+      "feature": "NDVI",
+      "auc_drop": 0.0197
+    },
+    {
+      "feature": "pdsi_jjas",
+      "auc_drop": 0.019
+    },
+    {
+      "feature": "def_wy_prev",
+      "auc_drop": 0.0175
+    },
+    {
+      "feature": "NDVI_sd",
+      "auc_drop": 0.0082
+    },
+    {
+      "feature": "NDMI_sd",
+      "auc_drop": 0.0071
+    },
+    {
+      "feature": "dNBR",
+      "auc_drop": 0.0043
+    },
+    {
+      "feature": "dNDVI",
+      "auc_drop": 0.0038
+    },
+    {
+      "feature": "asp_sin",
+      "auc_drop": 0.0024
+    },
+    {
+      "feature": "NBR",
+      "auc_drop": 0.0017
+    },
+    {
+      "feature": "slope",
+      "auc_drop": 0.0016
+    },
+    {
+      "feature": "dNDMI",
+      "auc_drop": 0.0015
+    },
+    {
+      "feature": "NDMI",
+      "auc_drop": 0.0006
+    },
+    {
+      "feature": "asp_cos",
+      "auc_drop": -0.0001
+    }
+  ],
+  "limitations": [
+    "Trained on where USFS aerial surveyors mapped tree mortality (mostly fir engraver and other bark beetles; 98% of polygons are mortality). It is not a general forest-health measure.",
+    "Most of the skill comes from terrain, forest cover and climate. Satellite features add a small gain in whole-block testing and no demonstrable gain in the strict new-places-and-year test.",
+    "Negatives are cells within 3 km of a survey polygon in the same year, because the survey service has no layer showing where aircraft flew. A cell with no polygon may simply not have been flown.",
+    "The likelihood is relative to surveyed forest. The training sample had a much higher damage rate than the whole Sierra, so do not read it as a real-world probability.",
+    "Burned patches (more than 5% burned since 2015) and patches with under 20% tree cover are not scored.",
+    "Satellite features use June-September composites. The app applies the model to the latest completed summer.",
+    "USFS polygons are approximate aerial sketches, some data is generalized, and the Forest Service has not assessed their accuracy.",
+    "Performance at Shaver Lake is lower than the Sierra-wide figure and has no confidence interval (few cells). Terrain and climate vary less inside a small area, which may limit any such model (not verified)."
+  ],
+  "sources": [
+    "USFS Insect and Disease Survey (damage areas, 2021-2024)",
+    "Sentinel-2 SR Harmonized (Google Earth Engine)",
+    "ESA WorldCover v200",
+    "SRTM elevation",
+    "MODIS MCD64A1 burned area",
+    "TerraClimate"
+  ]
+}
