@@ -1,0 +1,173 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.36548139429908,
+              36.9956007857938
+            ],
+            [
+              -119.3656209711377,
+              37.00010415084708
+            ],
+            [
+              -119.37123564974644,
+              36.99999205572509
+            ],
+            [
+              -119.37109574238539,
+              36.99548870888817
+            ],
+            [
+              -119.36548139429908,
+              36.9956007857938
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "patch_id": "P_r000_c023",
+        "row": 0,
+        "col": 23,
+        "center_lon": -119.368358,
+        "center_lat": 36.997796,
+        "layer_type": "forest_health",
+        "year": 2026,
+        "period": "2026-06-01/2026-09-30",
+        "observed_at": "2026-09-30T00:00:00Z",
+        "generated_at": "2026-11-20T02:14:49Z",
+        "model_version": "m1-index-v1",
+        "source": "Sentinel-2 SR Harmonized; ESA WorldCover v200; MODIS MCD64A1",
+        "data_kind": "derived_index",
+        "health_index": 26,
+        "health_band": "Healthy",
+        "ndvi": 0.501,
+        "ndmi": -0.037,
+        "trend_slope": 0.2,
+        "trend_label": "Stable vs peers",
+        "years_used": 5,
+        "burn_status": "unburned",
+        "burn_frac": 0.0,
+        "forest_frac": 0.97,
+        "data_quality": "good"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.46106622827382,
+              36.998162456770096
+            ],
+            [
+              -119.46121145527422,
+              37.00266550237632
+            ],
+            [
+              -119.46682592571345,
+              37.002548878917295
+            ],
+            [
+              -119.46668036824205,
+              36.9980458522615
+            ],
+            [
+              -119.46106622827382,
+              36.998162456770096
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "patch_id": "P_r001_c006",
+        "row": 1,
+        "col": 6,
+        "center_lon": -119.463946,
+        "center_lat": 37.000356,
+        "layer_type": "forest_health",
+        "year": 2026,
+        "period": "2026-06-01/2026-09-30",
+        "observed_at": "2026-09-30T00:00:00Z",
+        "generated_at": "2026-11-20T02:14:49Z",
+        "model_version": "m1-index-v1",
+        "source": "Sentinel-2 SR Harmonized; ESA WorldCover v200; MODIS MCD64A1",
+        "data_kind": "derived_index",
+        "health_index": 0,
+        "health_band": "High stress",
+        "ndvi": 0.394,
+        "ndmi": -0.112,
+        "trend_slope": -1.0,
+        "trend_label": "Stable vs peers",
+        "years_used": 5,
+        "burn_status": "unburned",
+        "burn_frac": 0.0,
+        "forest_frac": 0.5,
+        "data_quality": "good"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.33740919006915,
+              36.996157191378465
+            ],
+            [
+              -119.33754711418794,
+              37.000660646867644
+            ],
+            [
+              -119.34316194718757,
+              37.00054987829066
+            ],
+            [
+              -119.34302369251051,
+              36.99604644080252
+            ],
+            [
+              -119.33740919006915,
+              36.996157191378465
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "patch_id": "P_r000_c028",
+        "row": 0,
+        "col": 28,
+        "center_lon": -119.340285,
+        "center_lat": 36.998354,
+        "layer_type": "forest_health",
+        "year": 2026,
+        "period": "2026-06-01/2026-09-30",
+        "observed_at": "2026-09-30T00:00:00Z",
+        "generated_at": "2026-11-20T02:14:49Z",
+        "model_version": "m1-index-v1",
+        "source": "Sentinel-2 SR Harmonized; ESA WorldCover v200; MODIS MCD64A1",
+        "data_kind": "derived_index",
+        "health_index": 31,
+        "health_band": "Post-fire recovery",
+        "ndvi": 0.485,
+        "ndmi": 0.009,
+        "trend_slope": 6.6,
+        "trend_label": "Recovering",
+        "years_used": 5,
+        "burn_status": "mostly_burned",
+        "burn_frac": 0.68,
+        "forest_frac": 0.78,
+        "data_quality": "good"
+      }
+    }
+  ]
+}

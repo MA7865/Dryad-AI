@@ -6,3 +6,9 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .DS_Store
+data/grid_shp.zip
+.vscode/
+data/grid_shp/
+.venv-exp/
+data/cache/
+data/training/
