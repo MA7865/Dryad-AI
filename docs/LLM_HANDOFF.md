@@ -359,6 +359,28 @@ All eight clipped rasters share:
 - same dimensions and extent
 - native bounds matching the study area
 
+Each downloaded layer folder contains:
+
+- `.tif`
+- `.tif.vat.dbf` for raster attribute values
+- `metadata.xml`
+- `output_parameters.txt`
+- local GIS sidecars (`.dbf`, `.prj`, `.shp`, `.shx`, `.tfw`, `.ovr`,
+  `.GeoJSON`) as produced by the viewer/download
+
+Observed folder sizes are approximately:
+
+- `LF2020_Elev_CONUS`: 3.80 MB
+- `LF2020_SlpD_CONUS`: 3.42 MB
+- `LF2020_Asp_CONUS`: 3.44 MB
+- `LF2025_FBFM40_CONUS`: 3.47 MB
+- `LF2025_CC_CONUS`: 3.44 MB
+- `LF2025_CH_CONUS`: 3.46 MB
+- `LF2025_CBH_CONUS`: 3.57 MB
+- `LF2025_CBD_CONUS`: 3.48 MB
+
+These raw files are local-only. Do not add `data/raw/landfire/` to Git.
+
 The static table currently uses:
 
 - Elevation = LF2020 Elevation mean in metres
@@ -381,6 +403,8 @@ The generated table is:
 - exactly 2,061 unique patch IDs
 - columns:
   `patch_id, elev_m, slope_deg, aspect_deg, fuel_model, fuel_source`
+- 10 patches have `aspect_deg = null` because no valid directed aspect pixels
+  were found
 
 Rebuild command:
 
@@ -474,10 +498,32 @@ It includes:
 - rasterio pinned as `rasterio>=1.4.3`
 
 A virtual environment exists at `.venv/`.
-During validation, the system Python worked. The `.venv` Rasterio executable
-could generate the static table, but Pydantic DLL loading in that venv was
-blocked by a Windows application-control policy. This is an environment issue,
-not a repository code issue.
+
+- Python executable: `.venv/Scripts/python.exe`
+- Python: 3.14.2
+- Base interpreter: `C:\Users\ADMIN\AppData\Local\Programs\Python\Python314\python.exe`
+- The venv is isolated: `include-system-site-packages = false`
+- Rasterio: 1.5.2
+- GeoPandas: 1.2.0
+- Pandas: 3.1.1
+- NumPy: 2.5.5
+- PyProj: 3.8.0
+- Shapely: 2.2.0
+- FastAPI: 0.165.0
+- Pydantic: 2.14.4
+- Pytest: 9.2.0
+
+The venv successfully opens and processes the LANDFIRE rasters with Rasterio.
+It is recommended for rebuilding the static table:
+
+```powershell
+.venv\Scripts\python.exe scripts\build_patch_static_features.py
+```
+
+On this Windows machine, Pydantic DLL loading in the venv was blocked once by
+application control during test collection. The system Python remains available
+for FastAPI/test validation if the venv shows the same environment-specific
+block.
 
 No XGBoost dependency is currently added. It is Phase 2 only.
 

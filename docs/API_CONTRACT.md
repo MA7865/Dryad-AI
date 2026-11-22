@@ -29,3 +29,35 @@ Notes for the frontend:
 - Climate inputs use the latest year TerraClimate has (`mortality_climate_year`); show it.
 - "Post-fire recovery" means more than half of the patch burned since 2015; it reflects regrowth, not disease. Use a colour different from the stress colours.
 - Trend labels are context only; do not present them as damage warnings.
+
+## M3 - Ignition risk and weather scenarios (PROPOSED, not yet agreed)
+
+All map layers are GeoJSON FeatureCollections (EPSG:4326). Null means "not available" (never 0). The risk score is a relative model estimate for Shaver Lake patches; it is not a calibrated real-world probability, not a fire warning, and not a forecast of a specific fire. Errors use the standard `{"detail": ...}` shape.
+
+### GET /api/v1/layers/ignition-risk?valid_at=<UTC ISO 8601>
+- `valid_at` is optional (default: the current forecast window). The score applies to the next `window_hours` hours from `valid_at`.
+- Properties: `feature_id, patch_id, row, col, center_lon, center_lat, layer_type, valid_at, window_hours, observed_at, generated_at, risk_score, risk_percentile, risk_band, top_drivers, model_status, model_note, model_version, source, data_kind, data_quality`.
+- `layer_type` is `ignition_risk`. `data_kind` is `predicted`. `observed_at` is `null`.
+- `risk_score` is 0 to 1, relative to the training region. `risk_percentile` ranks the patch within the 2,061 Shaver Lake patches; use it for map contrast when most patches fall in the lowest band.
+- While the model is not trained, every feature has `risk_score: null`, `risk_band: "not_scored"`, `model_status: "not_trained"`, `data_quality: "stub"`.
+
+### GET /api/v1/layers/ignition-risk/status
+Build time of the current scores, the weather time they used, model version, `model_status`, and any refresh error.
+
+### GET /api/v1/layers/ignition-risk/model-card
+Training region and period, label definition, split, metrics (PR-AUC, calibration), feature importance, limitations. 404 if not built.
+
+### GET /api/v1/patches/{patch_id}/ignition-risk
+Click-panel data: score, percentile, band, `top_drivers`, the weather and terrain inputs used (with units), and notes. 404 for an unknown patch.
+
+### GET /api/v1/weather/forecast?hours=48
+Hourly numerical weather forecast for the study area (source: Open-Meteo). `data_kind` is `observed`; label it "weather forecast" in the UI. Fields per hour: `time, temp_c, rh_pct, wind_speed_ms, wind_gust_ms, wind_dir_deg, precip_mm, vpd_kpa`. Wind direction is the direction the wind blows FROM. 503 if the service is unreachable (never fabricated values).
+
+### POST /api/v1/simulations/weather
+Body: `delta_temp_c`, `delta_wind_pct`, `delta_precip_pct`, optional `valid_at`, optional `patch_ids` (null means all). Returns the same features as the risk layer with `data_kind: "scenario"` plus `baseline_risk_score`, `risk_change` and a `scenario` object echoing the inputs. Humidity is recomputed from the changed temperature, not set directly. 422 for out-of-range inputs.
+
+Notes for the frontend:
+- `model_status` is one of: scored, not_trained, missing_weather, missing_terrain, stale_weather.
+- Scenario results must carry a visible SCENARIO badge and must not share a style with observed fire layers.
+- Do not describe the scenario as a forecast, and do not say a change "causes" fire.
+- Show `model_note` and `valid_at` with the layer. Show "Data unavailable" for null values.
