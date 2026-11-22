@@ -116,3 +116,40 @@ Used by: M1 (labels for training and testing). Layer 1 of `https://apps.fs.usda.
 
 ## 10. Training data (not in Git)
 `data/training/` holds the sampled cells and features. Regenerate (about 30 minutes): `python scripts/fetch_ids_sierra.py`, `python scripts/make_training_cells.py`, `python -m scripts.extract_training_features --workers 3`, `python -m scripts.train_baselines`, `python -m scripts.train_final`, `python -m scripts.make_model_card_md`.
+
+## 11. M3 terrain and fuel data (manual setup)
+
+M3's static table is `data/processed/patch_static_features.csv`. It is not generated
+until the repository has a local DEM.
+
+### DEM
+
+The build script accepts a local DEM with:
+
+```
+python scripts/build_patch_static_features.py --dem C:\path\to\dem.tif
+```
+
+The DEM source, resolution, CRS, license and download URL remain **TO VERIFY**.
+Potential sources include USGS 3DEP or SRTM, but no source is selected by this
+Phase 1 implementation. The script reprojects patch geometry for raster access
+and computes slope/aspect using metric EPSG:32611 results. It fails clearly if
+the DEM is absent.
+
+### LANDFIRE fuel model
+
+Do not invent fuel values. Download the chosen LANDFIRE fuel-model product
+manually into:
+
+```
+data/raw/landfire/
+```
+
+Then pass the raster:
+
+```
+python scripts/build_patch_static_features.py --dem C:\path\to\dem.tif --landfire C:\path\to\landfire.tif
+```
+
+The exact LANDFIRE product name, version, tile, CRS and license are **TO VERIFY**
+before production use. Without a raster, `fuel_model` and `fuel_source` are `null`.

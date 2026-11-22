@@ -1,0 +1,14 @@
+{
+  "latitude": 37.08,
+  "longitude": -119.38,
+  "hourly": {
+    "time": ["2026-11-22T00:00", "2026-11-22T01:00"],
+    "temperature_2m": [20.0, 19.0],
+    "relative_humidity_2m": [30.0, 35.0],
+    "wind_speed_10m": [5.0, 4.5],
+    "wind_gusts_10m": [8.0, 7.0],
+    "wind_direction_10m": [270.0, 280.0],
+    "precipitation": [0.0, 0.2],
+    "vapour_pressure_deficit": [null, null]
+  }
+}
