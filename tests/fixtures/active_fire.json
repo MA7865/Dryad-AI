@@ -1,0 +1,422 @@
+
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.45579,
+          37.0043
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160731T093100Z_37.00430_-119.45579",
+        "patch_id": "P_r002_c007",
+        "layer_type": "active_fire",
+        "observed_at": "2016-07-31T09:31:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160731T093100Z_37.00430_-119.45579",
+        "confidence": "n",
+        "detection_time": "2016-07-31T09:31:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 20.75,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.44907,
+          37.00732
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160731T093100Z_37.00732_-119.44907",
+        "patch_id": "P_r002_c009",
+        "layer_type": "active_fire",
+        "observed_at": "2016-07-31T09:31:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160731T093100Z_37.00732_-119.44907",
+        "confidence": "n",
+        "detection_time": "2016-07-31T09:31:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 7.73,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.4546,
+          37.00797
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160731T093100Z_37.00797_-119.45460",
+        "patch_id": "P_r003_c008",
+        "layer_type": "active_fire",
+        "observed_at": "2016-07-31T09:31:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160731T093100Z_37.00797_-119.45460",
+        "confidence": "n",
+        "detection_time": "2016-07-31T09:31:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 20.75,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.4605,
+          37.00865
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160731T093100Z_37.00865_-119.46050",
+        "patch_id": "P_r003_c007",
+        "layer_type": "active_fire",
+        "observed_at": "2016-07-31T09:31:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160731T093100Z_37.00865_-119.46050",
+        "confidence": "n",
+        "detection_time": "2016-07-31T09:31:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 20.75,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.4966,
+          37.009
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160731T093100Z_37.00900_-119.49660",
+        "patch_id": "P_r003_c000",
+        "layer_type": "active_fire",
+        "observed_at": "2016-07-31T09:31:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160731T093100Z_37.00900_-119.49660",
+        "confidence": "n",
+        "detection_time": "2016-07-31T09:31:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 1.6,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.46678,
+          37.00937
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160731T093100Z_37.00937_-119.46678",
+        "patch_id": "P_r003_c006",
+        "layer_type": "active_fire",
+        "observed_at": "2016-07-31T09:31:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160731T093100Z_37.00937_-119.46678",
+        "confidence": "n",
+        "detection_time": "2016-07-31T09:31:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 14.73,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.47312,
+          37.0101
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160731T093100Z_37.01010_-119.47312",
+        "patch_id": "P_r003_c004",
+        "layer_type": "active_fire",
+        "observed_at": "2016-07-31T09:31:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160731T093100Z_37.01010_-119.47312",
+        "confidence": "n",
+        "detection_time": "2016-07-31T09:31:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 14.73,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.44814,
+          37.01102
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160731T093100Z_37.01102_-119.44814",
+        "patch_id": "P_r003_c009",
+        "layer_type": "active_fire",
+        "observed_at": "2016-07-31T09:31:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160731T093100Z_37.01102_-119.44814",
+        "confidence": "n",
+        "detection_time": "2016-07-31T09:31:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 8.71,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.43925,
+          37.00861
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160801T091200Z_37.00861_-119.43925",
+        "patch_id": "P_r003_c010",
+        "layer_type": "active_fire",
+        "observed_at": "2016-08-01T09:12:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160801T091200Z_37.00861_-119.43925",
+        "confidence": "n",
+        "detection_time": "2016-08-01T09:12:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 2.37,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.43929,
+          37.01347
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160801T091200Z_37.01347_-119.43929",
+        "patch_id": "P_r004_c010",
+        "layer_type": "active_fire",
+        "observed_at": "2016-08-01T09:12:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160801T091200Z_37.01347_-119.43929",
+        "confidence": "n",
+        "detection_time": "2016-08-01T09:12:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 2.37,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.44501,
+          37.01392
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160801T091200Z_37.01392_-119.44501",
+        "patch_id": "P_r004_c009",
+        "layer_type": "active_fire",
+        "observed_at": "2016-08-01T09:12:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160801T091200Z_37.01392_-119.44501",
+        "confidence": "n",
+        "detection_time": "2016-08-01T09:12:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 2.37,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.451,
+          37.01439
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160801T091200Z_37.01439_-119.45100",
+        "patch_id": "P_r004_c008",
+        "layer_type": "active_fire",
+        "observed_at": "2016-08-01T09:12:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160801T091200Z_37.01439_-119.45100",
+        "confidence": "n",
+        "detection_time": "2016-08-01T09:12:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 5.07,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.44015,
+          37.01841
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160801T091200Z_37.01841_-119.44015",
+        "patch_id": "P_r005_c010",
+        "layer_type": "active_fire",
+        "observed_at": "2016-08-01T09:12:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160801T091200Z_37.01841_-119.44015",
+        "confidence": "n",
+        "detection_time": "2016-08-01T09:12:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 9.61,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.45185,
+          37.01933
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160801T091200Z_37.01933_-119.45185",
+        "patch_id": "P_r005_c008",
+        "layer_type": "active_fire",
+        "observed_at": "2016-08-01T09:12:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160801T091200Z_37.01933_-119.45185",
+        "confidence": "n",
+        "detection_time": "2016-08-01T09:12:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 3.47,
+        "day_night": "N"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.44343,
+          37.00425
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160801T203300Z_37.00425_-119.44343",
+        "patch_id": "P_r002_c010",
+        "layer_type": "active_fire",
+        "observed_at": "2016-08-01T20:33:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160801T203300Z_37.00425_-119.44343",
+        "confidence": "n",
+        "detection_time": "2016-08-01T20:33:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 7.04,
+        "day_night": "D"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.44564,
+          37.0069
+        ]
+      },
+      "properties": {
+        "feature_id": "active_fire:VIIRS_SNPP_SP_20160801T203300Z_37.00690_-119.44564",
+        "patch_id": "P_r002_c009",
+        "layer_type": "active_fire",
+        "observed_at": "2016-08-01T20:33:00Z",
+        "generated_at": "2026-11-15T12:06:04Z",
+        "model_version": "m4-firms-0.1",
+        "source": "VIIRS_SNPP_SP",
+        "data_quality": "good",
+        "detection_id": "VIIRS_SNPP_SP_20160801T203300Z_37.00690_-119.44564",
+        "confidence": "l",
+        "detection_time": "2016-08-01T20:33:00Z",
+        "satellite_source": "VIIRS_SNPP_SP",
+        "frp_mw": 15.02,
+        "day_night": "D"
+      }
+    }
+  ]
+}
