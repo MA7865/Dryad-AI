@@ -4,6 +4,7 @@ from pathlib import Path
 
 import geopandas as gpd
 import pytest
+import pandas as pd
 from fastapi.testclient import TestClient
 
 from backend.app.main import app
@@ -121,6 +122,34 @@ def test_scenario_contract():
     assert feature["scenario"]["delta_temp_c"] == 3
 
 
+def test_openapi_documents_m3_response_schemas():
+    schema = app.openapi()
+    assert "/api/v1/layers/ignition-risk" in schema["paths"]
+    assert "/api/v1/layers/ignition-risk/status" in schema["paths"]
+    assert "/api/v1/patches/{patch_id}/ignition-risk" in schema["paths"]
+    assert "/api/v1/weather/forecast" in schema["paths"]
+    assert "/api/v1/simulations/weather" in schema["paths"]
+
+    forecast = schema["paths"]["/api/v1/weather/forecast"]["get"]
+    scenario = schema["paths"]["/api/v1/simulations/weather"]["post"]
+    assert "response" not in forecast["responses"]["200"] or forecast["responses"]["200"]["description"]
+    assert scenario["responses"]["200"]["description"]
+
+
 def test_static_script_fails_clearly_without_dem(tmp_path):
-    with pytest.raises(FileNotFoundError, match="DEM not found"):
+    with pytest.raises(FileNotFoundError, match="Elevation"):
         build_static(tmp_path / "missing.tif")
+
+
+def test_patch_static_features_match_grid():
+    table = pd.read_csv("data/processed/patch_static_features.csv")
+    grid = gpd.read_file("data/grid.geojson")
+    assert len(table) == 2061
+    assert table["patch_id"].nunique() == 2061
+    assert set(table["patch_id"]) == set(grid["patch_id"])
+    assert table["slope_deg"].dropna().between(0, 90).all()
+    assert table["aspect_deg"].dropna().between(0, 360).all()
+    assert not table["elev_m"].isin([-9999, 32767]).any()
+    assert not table["slope_deg"].isin([32767, 65535]).any()
+    assert not table["aspect_deg"].isin([-1, -9999, 32767]).any()
+    assert not table["fuel_model"].isin([-9999, 32767]).any()

@@ -119,37 +119,42 @@ Used by: M1 (labels for training and testing). Layer 1 of `https://apps.fs.usda.
 
 ## 11. M3 terrain and fuel data (manual setup)
 
-M3's static table is `data/processed/patch_static_features.csv`. It is not generated
-until the repository has a local DEM.
+M3's static table is `data/processed/patch_static_features.csv`.
 
-### DEM
+### LANDFIRE sources
 
-The build script accepts a local DEM with:
+- Elevation: LF2020 Elevation (`LF2020_Elev_CONUS`) - metres above sea level,
+  LANDFIRE/USGS EROS, DOI `10.5066/P1LJEZ3G`.
+- Slope: LF2020 Slope Degrees (`LF2020_SlpD_CONUS`) - degrees.
+- Aspect: LF2020 Aspect (`LF2020_Asp_CONUS`) - degrees from true north.
+- Fuel: LF2025 Scott and Burgan 40 fuel models
+  (`LF2025_FBFM40_CONUS`) - numeric FBFM40 codes.
 
-```
-python scripts/build_patch_static_features.py --dem C:\path\to\dem.tif
-```
+All clipped rasters use native CRS EPSG:5070 (NAD83 / US Albers Conical Equal
+Area) with 30 m pixels. The grid is transformed from EPSG:4326 to EPSG:5070
+before patch aggregation.
 
-The DEM source, resolution, CRS, license and download URL remain **TO VERIFY**.
-Potential sources include USGS 3DEP or SRTM, but no source is selected by this
-Phase 1 implementation. The script reprojects patch geometry for raster access
-and computes slope/aspect using metric EPSG:32611 results. It fails clearly if
-the DEM is absent.
+Elevation and slope are mean valid-pixel values. Aspect uses the circular mean
+of values from `0` through `359`; `-1` marks flat pixels and is excluded.
+Patches with no valid directed aspect are `null`. Fuel is the most common valid
+FBFM40 code. Missing values are `null`, not zero.
 
-### LANDFIRE fuel model
-
-Do not invent fuel values. Download the chosen LANDFIRE fuel-model product
-manually into:
-
-```
-data/raw/landfire/
-```
-
-Then pass the raster:
+Rebuild from the downloaded rasters:
 
 ```
-python scripts/build_patch_static_features.py --dem C:\path\to\dem.tif --landfire C:\path\to\landfire.tif
+python scripts/build_patch_static_features.py
 ```
 
-The exact LANDFIRE product name, version, tile, CRS and license are **TO VERIFY**
-before production use. Without a raster, `fuel_model` and `fuel_source` are `null`.
+Optional explicit paths:
+
+```
+python scripts/build_patch_static_features.py --dem <elev.tif> --slope <slopedeg.tif> --aspect <aspect.tif> --landfire <fbfm40.tif>
+```
+
+### License and provenance
+
+- LF2020 topographic products: USGS/LANDFIRE; metadata states no use constraints.
+  Source DOI: `https://doi.org/10.5066/P1LJEZ3G`.
+- LF2025 FBFM40: LANDFIRE/USGS; metadata explicitly marks the data
+  Creative Commons CC0 1.0 Universal / public domain:
+  `https://doi.org/10.5066/P1MAAYLC`.

@@ -1,16 +1,16 @@
 """
-Build the shared 500 m static terrain table.
+Build the shared 500 m static terrain and fuel table.
 
-Usage:
-    python scripts/build_patch_static_features.py --dem C:\\path\\to\\dem.tif
+Defaults use the downloaded LANDFIRE rasters in data/raw/landfire/.
+Elevation and slope are mean values for valid pixels. Aspect is the circular
+mean of non-flat pixels (-1 and nodata pixels are excluded). Fuel is the most
+common FBFM40 numeric code among valid pixels.
 
-If a LANDFIRE raster is supplied with --landfire, its values are kept as
-fuel_model and the basename is recorded in fuel_source. Without it, fuel_model
-and fuel_source are null. Missing terrain is never represented by zero.
+Run:
+    python scripts/build_patch_static_features.py
 
-Elevation, slope and aspect are derived from the DEM in EPSG:32611. Elevation
-is the mean within a patch, slope is the mean of 3x3 terrain slope in degrees,
-and aspect is the circular mean in degrees.
+The grid is loaded in EPSG:4326, converted to EPSG:5070 for patch raster
+aggregation, and written in sorted patch_id order.
 """
 import argparse
 import math
@@ -23,87 +23,100 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 GRID_PATH = ROOT / "data" / "grid.geojson"
 OUT_PATH = ROOT / "data" / "processed" / "patch_static_features.csv"
+LANDFIRE_ROOT = ROOT / "data" / "raw" / "landfire"
+
+DEFAULT_ELEV = LANDFIRE_ROOT / "LF2020_Elev_CONUS" / "LF2020_Elev_CONUS.tif"
+DEFAULT_SLOPE = LANDFIRE_ROOT / "LF2020_SlpD_CONUS" / "LF2020_SlpD_CONUS.tif"
+DEFAULT_ASPECT = LANDFIRE_ROOT / "LF2020_Asp_CONUS" / "LF2020_Asp_CONUS.tif"
+DEFAULT_FUEL = LANDFIRE_ROOT / "LF2025_FBFM40_CONUS" / "LF2025_FBFM40_CONUS.tif"
 
 
-def build(dem_path: Path, landfire_path: Path | None = None) -> pd.DataFrame:
-    if not dem_path.exists():
-        raise FileNotFoundError(
-            f"DEM not found: {dem_path}. Download a DEM or pass --dem with a local path."
-        )
+def _mask_values(dataset, geometry, *, nodata_values=()) -> np.ndarray:
+    from rasterio.mask import mask
+
+    values, _ = mask(dataset, [geometry], crop=True, all_touched=True)
+    flat = values[0].ravel().astype(np.float64)
+    flat = flat[np.isfinite(flat)]
+    for nodata in nodata_values:
+        flat = flat[flat != nodata]
+    return flat
+
+
+def circular_mean(values: np.ndarray) -> float | None:
+    valid = values[(values >= 0) & (values <= 359) & np.isfinite(values)]
+    if valid.size == 0:
+        return None
+    radians = np.radians(valid)
+    mean = math.degrees(math.atan2(np.mean(np.sin(radians)), np.mean(np.cos(radians)))) % 360
+    return round(float(mean), 3)
+
+
+def build(
+    dem_path: Path = DEFAULT_ELEV,
+    slope_path: Path = DEFAULT_SLOPE,
+    aspect_path: Path = DEFAULT_ASPECT,
+    fuel_path: Path = DEFAULT_FUEL,
+) -> pd.DataFrame:
+    paths = {
+        "Elevation": dem_path,
+        "Slope": slope_path,
+        "Aspect": aspect_path,
+        "FBFM40": fuel_path,
+    }
+    missing = [f"{name}: {path}" for name, path in paths.items() if not path.exists()]
+    if missing:
+        raise FileNotFoundError("Required LANDFIRE raster missing:\n" + "\n".join(missing))
+
     try:
         import rasterio
-        from rasterio.mask import mask
     except ImportError as exc:
-        raise RuntimeError("rasterio is required. Install requirements.txt before running this script.") from exc
+        raise RuntimeError("rasterio is required. Install it in the project venv.") from exc
 
     if not GRID_PATH.exists():
         raise FileNotFoundError(f"Shared grid not found: {GRID_PATH}")
     grid = gpd.read_file(GRID_PATH).sort_values("patch_id")
-    grid_m = grid.to_crs("EPSG:32611")
     rows = []
 
-    if landfire_path is not None:
-        if not landfire_path.exists():
-            raise FileNotFoundError(f"LANDFIRE raster not found: {landfire_path}")
+    with rasterio.open(dem_path) as elev_ds, rasterio.open(slope_path) as slope_ds, \
+         rasterio.open(aspect_path) as aspect_ds, rasterio.open(fuel_path) as fuel_ds:
+        target_crs = elev_ds.crs
+        for name, dataset in (
+            ("Elevation", elev_ds),
+            ("Slope", slope_ds),
+            ("Aspect", aspect_ds),
+            ("FBFM40", fuel_ds),
+        ):
+            if dataset.crs != target_crs:
+                raise ValueError(f"{name} CRS {dataset.crs} does not match Elevation CRS {target_crs}")
 
-    with rasterio.open(dem_path) as dem:
-        dem_crs = dem.crs
-        for _, patch in grid_m.iterrows():
-            patch_ll = gpd.GeoSeries([patch.geometry], crs="EPSG:32611").to_crs(dem_crs).iloc[0]
-            geom = [patch_ll.__geo_interface__]
-            try:
-                values, dem_transform = mask(dem, geom, crop=True, all_touched=True, filled=False)
-                elev = values[0].compressed()
-                elev_m = float(np.mean(elev)) if elev.size else None
+        grid_native = grid.to_crs(target_crs)
+        for _, patch in grid_native.iterrows():
+            geometry = patch.geometry.__geo_interface__
 
-                dem_values = values[0].filled(np.nan)
-                if dem_values.shape[0] > 1 and dem_values.shape[1] > 1:
-                    res_x = abs(dem_transform.a)
-                    res_y = abs(dem_transform.e)
-                    dzdx = np.gradient(dem_values, res_x, axis=1)
-                    dzdy = np.gradient(dem_values, res_y, axis=0)
-                    slope = np.degrees(np.arctan(np.sqrt(dzdx ** 2 + dzdy ** 2)))
-                    aspect = (np.degrees(np.arctan2(dzdx, -dzdy)) + 360) % 360
-                    valid_slope = slope[np.isfinite(slope)]
-                    valid_aspect = aspect[np.isfinite(aspect)]
-                    slope_deg = float(np.mean(valid_slope)) if valid_slope.size else None
-                    if valid_aspect.size:
-                        rad = np.radians(valid_aspect)
-                        angle = math.degrees(math.atan2(np.mean(np.sin(rad)), np.mean(np.cos(rad)))) % 360
-                        aspect_deg = round(angle, 3)
-                    else:
-                        aspect_deg = None
-                else:
-                    slope_deg = None
-                    aspect_deg = None
-            except Exception:
-                elev_m = None
-                slope_deg = None
-                aspect_deg = None
+            elevation = _mask_values(elev_ds, geometry, nodata_values=(-9999, elev_ds.nodata))
+            elev_m = round(float(np.mean(elevation)), 3) if elevation.size else None
 
+            slope = _mask_values(slope_ds, geometry, nodata_values=(32767, 65535, slope_ds.nodata))
+            slope = slope[(slope >= 0) & (slope <= 90)]
+            slope_deg = round(float(np.mean(slope)), 3) if slope.size else None
+
+            aspect = _mask_values(aspect_ds, geometry, nodata_values=(-9999, -1, aspect_ds.nodata))
+            aspect_deg = circular_mean(aspect)
+
+            fuel = _mask_values(fuel_ds, geometry, nodata_values=(32767, -9999, fuel_ds.nodata))
+            fuel = fuel[(fuel >= 91) & (fuel <= 204)]
             fuel_model = None
-            fuel_source = None
-            if landfire_path is not None:
-                try:
-                    with rasterio.open(landfire_path) as fuel:
-                        fuel_geom = gpd.GeoSeries([patch.geometry], crs="EPSG:32611").to_crs(fuel.crs).iloc[0]
-                        fuel_values, _ = mask(fuel, [fuel_geom.__geo_interface__], crop=True, all_touched=True)
-                        fuel_flat = fuel_values[0].ravel()
-                        fuel_flat = fuel_flat[np.isfinite(fuel_flat)]
-                        if fuel_flat.size:
-                            fuel_model = int(np.median(fuel_flat))
-                    fuel_source = landfire_path.name
-                except Exception:
-                    fuel_model = None
-                    fuel_source = landfire_path.name
+            if fuel.size:
+                values, counts = np.unique(fuel.astype(np.int32), return_counts=True)
+                fuel_model = int(values[np.argmax(counts)])
 
             rows.append({
                 "patch_id": patch["patch_id"],
-                "elev_m": round(elev_m, 3) if elev_m is not None else None,
-                "slope_deg": round(slope_deg, 3) if slope_deg is not None else None,
-                "aspect_deg": round(aspect_deg, 3) if aspect_deg is not None else None,
+                "elev_m": elev_m,
+                "slope_deg": slope_deg,
+                "aspect_deg": aspect_deg,
                 "fuel_model": fuel_model,
-                "fuel_source": fuel_source,
+                "fuel_source": fuel_path.name if fuel_model is not None else None,
             })
 
     return pd.DataFrame(rows, columns=["patch_id", "elev_m", "slope_deg", "aspect_deg", "fuel_model", "fuel_source"])
@@ -111,10 +124,12 @@ def build(dem_path: Path, landfire_path: Path | None = None) -> pd.DataFrame:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dem", required=True, type=Path)
-    parser.add_argument("--landfire", type=Path)
+    parser.add_argument("--dem", type=Path, default=DEFAULT_ELEV)
+    parser.add_argument("--slope", type=Path, default=DEFAULT_SLOPE)
+    parser.add_argument("--aspect", type=Path, default=DEFAULT_ASPECT)
+    parser.add_argument("--landfire", type=Path, default=DEFAULT_FUEL)
     args = parser.parse_args()
-    table = build(args.dem, args.landfire)
+    table = build(args.dem, args.slope, args.aspect, args.landfire)
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     table.to_csv(OUT_PATH, index=False)
     print(f"Wrote {len(table)} rows to {OUT_PATH}")
