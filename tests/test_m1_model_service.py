@@ -53,3 +53,8 @@ def test_climate_years_fall_back(monkeypatch):
     monkeypatch.setattr(features_gee, "latest_climate_year", lambda: 2025)
     assert features_gee.climate_years(2026) == (2025, 2024)
     assert features_gee.climate_years(2024) == (2024, 2023)
+
+def test_percentile_among_scored_patches():
+    out = model_service.score(_df()).set_index("patch_id")
+    assert out.loc["P1", "mortality_percentile"] == 50
+    assert out.loc["P2", "mortality_percentile"] == 100

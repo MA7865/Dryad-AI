@@ -13,5 +13,5 @@ pytest>=9.2.0
 ipykernel>=7.3.0
 matplotlib>=3.10.9
 earthengine-api>=1.7.48
-scikit-learn>=1.7.2
-joblib>=1.6.0
+scikit-learn==1.9.1
+joblib==1.6.0

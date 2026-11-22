@@ -16,19 +16,12 @@ Status: [branch m1/forest-health, pull request OPEN / MERGED - fill in]. Last up
 - **Tests:** `python -m pytest` (the live Earth Engine test runs only with `M1_LIVE_TEST=1`).
 
 ## 2. Results so far
-
-Labels: USFS aerial-survey mortality polygons (15,457, 2021-2024). 51,641 labelled patch-years (24.9% positive) outside Shaver Lake were used for training; Shaver Lake was never used.
-
-| Test | Result |
-|---|---|
-| Whole 20 km blocks held out (AUC) | 0.783 (95% 0.766-0.796) |
-| New blocks and new year 2024, environment-only vs deployed features | 0.711 vs 0.727 (gain interval includes 0) |
-| Shaver Lake, never seen (AUC; 683 cells, 99 positives) | 0.706 |
-
-- Top 10% of patches flagged: 69% were mapped as damaged versus 25% base rate. High + Elevated (30% of patches) catches about 60% of mapped damage.
-- Calibration within about 0.02 across deciles. Most skill comes from elevation, climate and tree cover; satellite features add about +0.01 AUC.
-- The raw index level does not flag surveyed damage (AUC 0.18 in the 22-polygon box). The 5-summer trend is weak (AUC 0.54 before the survey year, 0.61 including it): treat it as context.
-- Climate inputs use the latest year TerraClimate has (it lags real time); the API reports which year (`mortality_climate_year`).
+Details: `docs/M1_MODEL_CARD.md`. Labels: USFS mortality polygons (15,457, 2021-2024); Shaver Lake never used in training.
+- Held-out 20 km blocks: AUC 0.78 (0.77-0.80). Top 10% of patches flagged: 69% damaged vs 25% overall.
+- Shaver Lake never seen: AUC 0.71 (683 patches, 99 damaged).
+- Terrain and climate give most of the skill; satellite features add about +0.01 AUC.
+- The condition index does not flag surveyed damage (AUC 0.18 in the small Shaver box); the 5-summer trend is weak (AUC 0.54 / 0.61). Treat both as context.
+- Climate inputs use the latest year TerraClimate has (2024); the API reports it.
 - Prithvi-EO-2.0 loads and runs fast; no comparison was run.
 
 ## 3. What you can reuse
