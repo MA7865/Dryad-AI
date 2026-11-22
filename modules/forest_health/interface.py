@@ -103,7 +103,7 @@ def get_patch(patch_id: str) -> dict | None:
     if lp is not None:
         live = {k: lp[k] for k in ("window_start", "window_end", "observed_at", "health_index",
                                    "health_band", "ndvi", "ndmi", "obs_count", "data_quality")}
-        for k in ("mortality_likelihood", "mortality_band", "model_status",
+        for k in ("mortality_likelihood", "mortality_band", "mortality_percentile","model_status",
                   "mortality_model_version", "mortality_model_window","mortality_climate_year"):
             live[k] = lp.get(k)
         live["note"] = LIVE_NOTE

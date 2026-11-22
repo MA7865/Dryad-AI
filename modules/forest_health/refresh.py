@@ -71,6 +71,7 @@ def build_live(days: int = 30):
             "obs_count": rnd(r["obs_count"], 1),
             "data_quality": r["data_quality"],
             "mortality_likelihood": clean(mrow.get("mortality_likelihood")),
+            "mortality_percentile": clean(mrow.get("mortality_percentile")),
             "mortality_band": band if isinstance(band, str) else None,
             "model_status": mrow.get("model_status", mmeta.get("status", "model_not_available")),
             "mortality_model_version": mmeta.get("model_version"),

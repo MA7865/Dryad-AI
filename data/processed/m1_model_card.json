@@ -1,6 +1,6 @@
 {
   "model_version": "m1-mortality-hgb-v1",
-  "generated_at": "2026-11-21T12:14:49Z",
+  "generated_at": "2026-11-22T07:09:03Z",
   "algorithm": "HistGradientBoostingClassifier (scikit-learn 1.9.1)",
   "target": "A 500 m patch is positive in a year if USFS aerial-survey MORTALITY polygons cover at least 10% of it that year.",
   "features": [
@@ -106,29 +106,29 @@
           "n": 40904,
           "positives": 10939,
           "base_rate": 0.267,
-          "auc": 0.767,
-          "pr_auc": 0.57,
+          "auc": 0.764,
+          "pr_auc": 0.567,
           "precision_top10pct": 0.709,
           "auc_95ci": [
-            0.748,
-            0.782
+            0.745,
+            0.779
           ]
         },
         "2_option_A": {
           "n": 40904,
           "positives": 10939,
           "base_rate": 0.267,
-          "auc": 0.777,
-          "pr_auc": 0.586,
-          "precision_top10pct": 0.727,
+          "auc": 0.776,
+          "pr_auc": 0.584,
+          "precision_top10pct": 0.72,
           "auc_95ci": [
-            0.76,
-            0.792
+            0.759,
+            0.79
           ]
         },
         "auc_gain_A_over_env_95ci": [
-          0.007,
-          0.014
+          0.008,
+          0.016
         ]
       },
       "strict_test_new_blocks_and_2024": {
@@ -136,29 +136,29 @@
           "n": 2049,
           "positives": 364,
           "base_rate": 0.178,
-          "auc": 0.711,
+          "auc": 0.718,
           "pr_auc": 0.32,
-          "precision_top10pct": 0.343,
+          "precision_top10pct": 0.333,
           "auc_95ci": [
-            0.656,
-            0.763
+            0.662,
+            0.776
           ]
         },
         "2_option_A": {
           "n": 2049,
           "positives": 364,
           "base_rate": 0.178,
-          "auc": 0.727,
-          "pr_auc": 0.32,
-          "precision_top10pct": 0.338,
+          "auc": 0.683,
+          "pr_auc": 0.283,
+          "precision_top10pct": 0.289,
           "auc_95ci": [
-            0.671,
-            0.779
+            0.622,
+            0.746
           ]
         },
         "auc_gain_A_over_env_95ci": [
-          -0.016,
-          0.045
+          -0.085,
+          0.02
         ]
       },
       "shaver_lake_never_seen_baseline": {
@@ -166,17 +166,17 @@
           "n": 683,
           "positives": 99,
           "base_rate": 0.145,
-          "auc": 0.629,
-          "pr_auc": 0.201,
-          "precision_top10pct": 0.235
+          "auc": 0.634,
+          "pr_auc": 0.209,
+          "precision_top10pct": 0.279
         },
         "2_option_A": {
           "n": 683,
           "positives": 99,
           "base_rate": 0.145,
-          "auc": 0.637,
-          "pr_auc": 0.232,
-          "precision_top10pct": 0.309
+          "auc": 0.632,
+          "pr_auc": 0.217,
+          "precision_top10pct": 0.279
         }
       }
     },

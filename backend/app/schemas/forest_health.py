@@ -21,6 +21,7 @@ class LiveObservation(BaseModel):
     note: str
     mortality_likelihood: float | None = None
     mortality_band: str | None = None
+    mortality_percentile: float | None = None
     model_status: str | None = None
     mortality_model_version: str | None = None
     mortality_model_window: str | None = None

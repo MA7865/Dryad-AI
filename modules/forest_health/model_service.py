@@ -88,11 +88,13 @@ def score(df: pd.DataFrame) -> pd.DataFrame:
         ["burned_not_scored", "too_little_forest", "missing_data", "too_few_observations"],
         default="scored")
     out = pd.DataFrame({"patch_id": df["cell_id"].to_numpy(), "model_status": status,
-                        "mortality_likelihood": np.nan, "mortality_band": None})
+                        "mortality_likelihood": np.nan, "mortality_percentile": np.nan,
+                        "mortality_band": None})
     ok = status == "scored"
     if ok.any():
         p = model.predict_proba(df.loc[ok, feats])[:, 1]
         out.loc[ok, "mortality_likelihood"] = np.round(p, 3)
+        out.loc[ok, "mortality_percentile"] = np.round(100 * pd.Series(p).rank(pct=True).to_numpy())
         hi, el = card["bands"]["high"], card["bands"]["elevated"]
         out.loc[ok, "mortality_band"] = np.where(p >= hi, "High", np.where(p >= el, "Elevated", "Lower"))
     return out
