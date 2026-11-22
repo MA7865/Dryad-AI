@@ -8,39 +8,23 @@ Coordinates: EPSG:4326 in all GeoJSON. Distances and areas are computed in EPSG:
 
 | Field | Type | Meaning |
 |---|---|---|
-| `patch_id` | string | Patch ID from the shared grid, e.g. `P_r012_c034` |
-| `row`, `col` | integer | Grid row (0 = south) and column (0 = west) |
-| `center_lon`, `center_lat` | number | Patch centre, degrees |
-| `layer_type` | string | Always `forest_health` |
-| `year` | integer | Summer the values describe (latest: 2026) |
-| `period` | string | Date range of the summer composite, 1 June to 30 September |
-| `observed_at` | string | Nominal end date of the composite (30 September, 00:00 UTC). Not a single acquisition time |
-| `generated_at` | string | When the file was built, UTC |
-| `model_version` | string | `m1-index-v1` |
-| `source` | string | Datasets used |
-| `data_kind` | string | `derived_index` (calculated from observed satellite data) |
-| `health_index` | integer 0-100, or null | Relative condition score. Higher = greener and moister compared with unburned forest in this area. Null when not scored |
-| `health_band` | string | `Healthy`, `Moderate stress`, `High stress`, `Post-fire recovery` or `Not scored` |
-| `ndvi` | number, or null | Mean NDVI (B8, B4) over the patch's tree pixels. Range -1 to 1 |
-| `ndmi` | number, or null | Mean NDMI (B8, B11) over tree pixels. Related to canopy moisture. Range -1 to 1 |
-| `trend_slope` | number, or null | Change in `health_index` per year relative to similar patches, over the latest 5 summers (needs at least 4). Unit: points per year |
-| `trend_label` | string | `Improving vs peers`, `Stable vs peers`, `Declining vs peers`, `Recovering` or `Not enough data` |
-| `years_used` | integer | Number of summers used for the trend |
-| `burn_status` | string | `unburned` (burn_frac up to 0.05), `partial`, or `mostly_burned` (above 0.50) |
-| `burn_frac` | number 0-1 | Share of the patch flagged burned 2015-2026 (MODIS MCD64A1, 500 m) |
-| `forest_frac` | number 0-1 | Share of the patch that is tree cover (ESA WorldCover v200) |
-| `data_quality` | string | `good`, `limited` (under 90% cloud-free pixels or under 50% tree cover) or `not_scored` |
+| `patch_id`, `row`, `col`, `center_lon`, `center_lat` | | Shared grid identifiers |
+| `layer_type`, `data_kind`, `model_version`, `source`, `generated_at` | string | `forest_health`; `derived_index`; index version; datasets; build time |
+| `year`, `period` | | Summer shown (June-September); live layer: `window_start`/`window_end` (end exclusive), `observed_at` (newest scene date) |
+| `health_index` | integer 0-100, or null | Relative condition score (greenness and moisture versus unburned forest). Null when not scored |
+| `health_band` | string | Healthy, Moderate stress, High stress, Post-fire recovery, Not scored |
+| `ndvi`, `ndmi` | number or null | Mean over tree pixels (-1 to 1) |
+| `trend_slope`, `trend_label` | number, string | Change per year in the score relative to similar patches over five summers; Improving vs peers, Stable vs peers, Declining vs peers, Recovering, Not enough data. Context only |
+| `burn_status`, `burn_frac` | string, 0-1 | unburned / partial / mostly_burned; share burned since 2015 (MODIS, 500 m) |
+| `forest_frac`, `obs_count` | | Tree-cover share; clear observations per pixel in the window |
+| `data_quality` | string | good, limited, not_scored |
+| `mortality_likelihood` | 0-1, or null | Model output: relative likelihood that USFS aerial surveys would map tree mortality in the patch |
+| `mortality_percentile` | 1-100, or null | Rank of the likelihood among scored patches |
+| `mortality_band` | string or null | Lower (below 0.305), Elevated (0.305 up to 0.567), High (0.567 or more); cutoffs from the model card |
+| `model_status` | string | scored, burned_not_scored, too_little_forest, missing_data, too_few_observations |
+| `mortality_model_version`, `mortality_model_window`, `mortality_climate_year` | | Model version; June-September window scored; climate year used |
 
-### How `health_index` is calculated
-1. Take the patch's mean NDVI and mean NDMI over tree pixels for the summer.
-2. Rescale each linearly to 0-1 between the 5th and 95th percentile of **unburned** patches (all five summers pooled), clipping at 0 and 1. Saved values: NDVI 0.397 to 0.713, NDMI -0.104 to 0.236 (`data/processed/m1_reference_bounds.json`).
-3. Average the two and multiply by 100.
-
-### How bands are assigned
-- Not scored: under 20% tree cover or missing indices.
-- Post-fire recovery: `burn_status` is `mostly_burned` (the score is still shown).
-- Otherwise by the unburned reference: High stress below 6 (lowest 10%), Moderate stress 6 to under 21 (next 20%), Healthy 21 and above. The bands are relative, not validated thresholds.
-
-### How `trend_slope` is calculated
-Each patch's `health_index` minus the same-year median of unburned patches, then a straight-line fit over the latest 5 summers. Subtracting the median removes the shared year-to-year (weather) trend. Labels use +/-1.5 points per year as the cutoff.
-This trend has not been validated against reference damage (AUC 0.42 against USFS polygons, exploratory). Describe it as relative change in greenness and moisture, not as a decline in health.
+### Calculations
+- Condition index: NDVI and NDMI of tree pixels are each rescaled between the 5th and 95th percentile of unburned patches (values saved in `data/processed/m1_reference_bounds.json`), then averaged (x100). Bands use the 10% and 30% points of the unburned reference. The live layer is scored against the unburned patches in the same window.
+- Mortality likelihood: gradient-boosted trees on 16 features: elevation, slope, aspect (sine, cosine), tree cover, climatic water deficit (water year and previous), summer drought index, NDVI, NDMI, NBR, spread of NDVI and NDMI inside the patch, and the change of NDVI, NDMI and NBR since the previous summer.
+- Trend: the score minus the same-year median of unburned patches, a straight-line fit over the latest five summers; labels use +/-1.5 points per year.
