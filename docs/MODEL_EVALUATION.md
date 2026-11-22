@@ -136,34 +136,35 @@ Reading: moving the start up to 600 m north, east or west leaves IoU at 0.44 to 
 ## M1 - Forest health
 
 ### Prediction target
-M1 does not predict a labelled class. It outputs a **relative condition index** (0-100) and a band, built from Sentinel-2 NDVI and NDMI and compared with unburned forest in the same area. No cause (insects, drought, disease) is inferred.
+A 500 m patch is positive in a year if USFS aerial-survey mortality polygons cover at least 10% of it. The model outputs a likelihood and a band; it does not diagnose a cause.
 
-### Why there is no trained classifier
-The only reference labels are USFS aerial-survey damage polygons: 22 in the study area for 2021-2024 (2, 11, 6 and 3 per year), about 4,900 acres. 19 are fir engraver, 16 are "very light" or "light" damage (1-10% of trees), and 11 of the 22 are in 2022. That is too few, too weak and too uneven to train and fairly test a classifier. A "no polygon" patch is not necessarily healthy, so the other class would be noisy.
+### Why this target
+USFS polygons are the only independent labels. The Sierra Nevada has 15,457 polygons for 2021-2024 (98% mortality, 68% fir engraver), enough to train and test, unlike the 22 polygons in the Shaver Lake box.
 
-### Data
-Sentinel-2 SR Harmonized summer composites 2022-2026, ESA WorldCover (tree mask), MODIS burned area (burn context), USFS IDS polygons (check only). Details in `DATA_SOURCES.md`.
+### Data and split design (fixed before looking at results)
+- Positives: at least 10% covered. Negatives: unburned cells within 3 km of a polygon of that year and under 1% covered (no flight-coverage layer exists). Ambiguous cells (1-10%) are dropped. Burned (over 5% since 2015) and low-forest (under 20%) patches are excluded.
+- 31,940 sampled 500 m cells (all 2,061 Shaver Lake patches plus 30,000 random cells near polygons), summers 2020-2024; 51,641 labelled patch-years outside Shaver Lake.
+- Tests: whole 20 km blocks held out; new blocks and a new year (2024); Shaver Lake, never used in training.
+- Baselines: environment only (terrain, tree cover, climate) versus environment plus satellite features.
+- Intervals: resampling whole blocks.
 
-### Train/test split and baseline
-Not applicable: nothing is trained, and the scale is fixed from the unburned reference (`m1_reference_bounds.json`). Reference scale and band cutoffs are fitted on the same data they score, so they describe this area only.
+### Results (full tables: docs/M1_MODEL_CARD.md)
+- Whole blocks held out: AUC 0.78 (95% 0.77-0.80); top 10% flagged: 69% damaged versus 25% overall.
+- By year: AUC 0.72 (2021), 0.77 (2022), 0.80 (2023), 0.79 (2024).
+- Strictest test (new blocks and 2024): AUC about 0.73; the satellite gain over environment-only is not demonstrable (interval includes 0).
+- Shaver Lake, never seen: AUC 0.71 (683 patches, 99 damaged).
+- Calibration within about 0.02 per decile. Bands: High = 10% of patches with 69% damaged; High + Elevated = 30% of patches, about 50% damaged, catching about 60% of mapped damage.
+- Importance: elevation, climatic water deficit and tree cover dominate; satellite features add about +0.01 AUC.
 
-### Checks performed
-- **Band split:** among 754 scored unburned patches (2026), 12% High stress, 23% Moderate, 65% Healthy, close to the intended 10/20/70 split.
-- **Burned patches:** 1,068 scored, mostly burned patches are labelled Post-fire recovery. 813 of 1,132 mostly burned patches show an improving trend, consistent with regrowth after the 2020 Creek Fire.
-- **Trend sanity:** slopes for unburned patches centre near zero (median 0.1 points per year), so the shared weather trend is removed. 590 of 754 are "Stable vs peers".
-- **USFS overlay (exploratory, 2022-2024, unburned patches):** 94 of 2,262 scored patch-years overlap a USFS damage polygon (10% or more of the patch covered). The same patches recur across years and neighbouring polygons overlap in space, so the effective sample is smaller than it looks.
-  - *The score level does not detect damage.* These patches score higher, not lower: mean Health Index 73 vs 42 for the rest, AUC 0.18 for ranking them as more stressed. They sit in denser forest (NDVI 0.63 vs 0.53, tree cover 84% vs 74%). Against unlabelled patches within 2.5 km they score 3.5 points higher on average and only 42% are lower, so there is no local signal either.
-  - *The change in relative score from 2022 to 2024 carries a modest signal.* Ranking the 754 patches by how much their score fell gives an AUC of 0.75 (bootstrap 95% interval 0.70-0.81; 84 patches with a polygon). Polygon patches start higher, so part of this could be regression to the mean. After adjusting for the starting level (fitted on patches without polygons) the AUC is 0.66 (0.60-0.72). The bootstrap treats patches as independent, so the interval is probably too narrow.
-  - *M1's own 5-summer trajectory does not show this signal.* AUC 0.42 (754 patches, 84 with a polygon): no evidence that the trend labels track the surveyed damage.
-  - *Status: exploratory.* The 2022-2024 window was examined after the first check failed, so 0.66 is probably optimistic. It needs an independent test (for example 2025 survey polygons).
+### Other checks
+- Condition index: AUC 0.18 against the 22 Shaver polygons (damaged patches are denser, greener forest), so it is described as relative greenness, not damage.
+- 5-summer trend: AUC 0.54 before the survey year, 0.61 including it: context only.
+- Training/serving parity: features recomputed through the live code path match the training table to 5 decimals.
 
-### Limitations
-- A low score means lower greenness and moisture than similar unburned forest, from any cause, including terrain, aspect and canopy type.
-- USFS polygons are approximate aerial sketches and can include healthy trees.
-- Burn flag is coarse (500 m). Forest mask is from 2021. Only 5 summers. Summer medians hide within-season change.
-- Trend labels use a +/-1.5 points per year cutoff chosen as a first setting, not validated against ground truth. Over 5 points the trend is noisy.
-- The 0-100 scale is relative: the score is not comparable with other regions without rebuilding the scale.
-
-### Known leakage risks
-None in the training sense (no training). The main risk is over-reading the USFS overlay: with few positives and polygons that are themselves approximate, results are indicative only.
-- The change measure and window were chosen after looking at the same 84 labelled patches, and several checks were tried (level, neighbours, change). Treat the results as hypothesis-generating, not confirmed.
+### Limitations and leakage risks
+- Polygons are approximate aerial sketches, partly generalized, with no accuracy assessment.
+- Neighbouring cells are correlated; whole-block holdout addresses this. The same polygons feed several years' cells.
+- The sample is drawn near polygons, so its damage rate (25%) is higher than the whole Sierra's; band cutoffs come from out-of-fold predictions on this sample.
+- The 10% coverage threshold, 3 km rule and band cutoffs were fixed before testing. Several tests were run and all are reported.
+- Climate inputs for the latest summers use the latest year available (2024), not the scoring year.
+- Shaver Lake results rest on 99 damaged patches and have no confidence interval.
