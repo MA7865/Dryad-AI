@@ -1,8 +1,6 @@
-
 from fastapi import FastAPI
 
-from backend.app.api import forest_health
-from backend.app.api import vegetation
+from backend.app.api import fires, forest_health, vegetation
 
 app = FastAPI(title="Dryad.AI API")
 
@@ -11,6 +9,9 @@ app.include_router(forest_health.router)
 
 # Member 2 - Vegetation & Anomaly
 app.include_router(vegetation.router)
+
+# Member 4 - Fire monitoring and spread
+app.include_router(fires.router)
 
 
 @app.get("/")

@@ -14,6 +14,12 @@ is multiplied by exp(k * (cos(angle between that direction and the wind) - 1)), 
 unchanged straight downwind, weaker across the wind and weakest against it. k is a tuning knob,
 not a physical measurement. With wind_k = 0 the result is identical to Version 0.
 
+Version 2 adds optional SLOPE: pass elevation (an array on the same grid, metres) and slope_b. Fire moving
+from a cell to a neighbour is multiplied by exp(b * rise / run), where rise / run is the elevation gain
+divided by the distance between the cell centres (capped at +-1, a 45 degree slope). Uphill is faster,
+downhill slower, flat ground is unchanged. b is a tuning knob, like k. With slope_b = 0 (or no elevation)
+the result is identical to the earlier versions.
+
 Version 0 is told how big the real fire was (it stops when it has burned that many cells), so
 its score measures SHAPE and LOCATION only. It has no real clock: a "step" is not an hour.
 """
@@ -93,20 +99,54 @@ def direction_weights(wind_toward_deg=None, wind_k: float = 0.0) -> list:
     return out
 
 
+SLOPE_CAP = 1.0        # rise / run is capped at +-1 (a 45 degree slope)
+
+
+def slope_multipliers(elevation: np.ndarray, slope_b: float, cell: int = CELL_M, cap: float = SLOPE_CAP):
+    """One array per entry of NEIGHBOURS: out[r, c] is the factor for fire arriving at cell (r, c) from
+    the neighbouring cell it is coming from. Returns None when there is no slope effect."""
+    if elevation is None or slope_b == 0:
+        return None
+    elev = np.asarray(elevation, dtype=np.float64)
+    out = []
+    for dr, dc, _ in NEIGHBOURS:
+        source = np.zeros_like(elev)                     # same shift as _shift: source[r, c] = elev[r - dr, c - dc]
+        h, w = elev.shape
+        source[max(dr, 0):h + min(dr, 0), max(dc, 0):w + min(dc, 0)] = \
+            elev[max(-dr, 0):h + min(-dr, 0), max(-dc, 0):w + min(-dc, 0)]
+        run = cell * math.hypot(dr, dc)
+        out.append(np.exp(slope_b * np.clip((elev - source) / run, -cap, cap)))
+    return out
+
+
 def simulate(domain: Domain, ignition_xy, target_cells: int, p: float = 0.4,
              burn_steps: int = 3, seed: int = 0, max_steps: int = 10_000,
-             wind_toward_deg: float = None, wind_k: float = 0.0, return_steps: bool = False):
+             wind_toward_deg: float = None, wind_k: float = 0.0, return_steps: bool = False,
+             wind_schedule: list = None, elevation: np.ndarray = None, slope_b: float = 0.0):
     """Grow a fire from ignition_xy until it has burned exactly target_cells cells.
 
     p           chance per step that a burning cell ignites one orthogonal neighbour
     burn_steps  how many steps a cell keeps burning (and keeps passing fire on)
     wind_toward_deg, wind_k   optional wind (see the module note); k = 0 means no wind
+    wind_schedule optional list of (toward_deg, k), one entry per hour of a real wind sequence (Version 1b).
+                  The model has no clock, so time is taken to be proportional to the area burned: the
+                  first 1/H of the final area grows under hour 0's wind, the next 1/H under hour 1's,
+                  and so on. When given, wind_toward_deg and wind_k are ignored.
+    elevation, slope_b   optional slope (see the module note): elevation in metres on the domain grid
+                  (shape domain.shape) and the slope strength b; b = 0 means no slope effect
     return_steps  if True, return (burned, step) where step[r, c] is the step the cell ignited
                   (0 = ignition cell, -1 = never burned)
     Returns a boolean array: True where the fire burned.
     """
     rng = np.random.default_rng(seed)
+    if elevation is not None and np.shape(elevation) != domain.shape:
+        raise ValueError("elevation must have the same shape as the domain")
+    slope_mult = slope_multipliers(elevation, slope_b, domain.cell)
     weights = direction_weights(wind_toward_deg, wind_k)
+    if wind_schedule:
+        sched_weights = [direction_weights(t, k) for t, k in wind_schedule]
+        hour = 0
+        weights = sched_weights[0]
     burned = np.zeros(domain.shape, dtype=bool)
     left = np.zeros(domain.shape, dtype=np.int16)          # burning steps remaining
     r, c = domain.cell_of(*ignition_xy)
@@ -117,6 +157,10 @@ def simulate(domain: Domain, ignition_xy, target_cells: int, p: float = 0.4,
     for step_no in range(1, max_steps + 1):
         if burned.sum() >= target_cells:
             break
+        if wind_schedule:
+            new_hour = min(len(sched_weights) - 1, int(burned.sum() / target_cells * len(sched_weights)))
+            if new_hour != hour:
+                hour, weights = new_hour, sched_weights[new_hour]
         burning = left > 0
         if not burning.any():
             # The fire went out before reaching the target (a thin front can fizzle when the wind
@@ -131,8 +175,9 @@ def simulate(domain: Domain, ignition_xy, target_cells: int, p: float = 0.4,
             left[frontier] = burn_steps
             burning = left > 0
         new = np.zeros(domain.shape, dtype=bool)
-        for dr, dc, weight in weights:
-            new |= _shift(burning, dr, dc) & (rng.random(domain.shape) < p * weight)
+        for i, (dr, dc, weight) in enumerate(weights):
+            chance = p * weight if slope_mult is None else p * weight * slope_mult[i]
+            new |= _shift(burning, dr, dc) & (rng.random(domain.shape) < chance)
         new &= ~burned
         left[burning] -= 1
         excess = int(burned.sum() + new.sum()) - target_cells

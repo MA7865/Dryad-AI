@@ -14,7 +14,7 @@ from modules.fire_monitoring import active_fire, firms_client
 KEY = "ABCDEF0123456789ABCDEF0123456789"
 ISO_UTC = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
 COMMON = ["feature_id", "patch_id", "layer_type", "observed_at", "generated_at",
-          "model_version", "source", "data_quality"]
+          "model_version", "source", "data_quality", "data_kind"]
 M4_REQUIRED = ["detection_id", "confidence", "detection_time", "satellite_source"]
 HEADER = "latitude,longitude,bright_ti4,scan,track,acq_date,acq_time,satellite,instrument,confidence,version,bright_ti5,frp,daynight"
 ROWS = [
@@ -139,3 +139,16 @@ def test_point_on_cell_edge_still_gets_one_patch():
     df = pd.read_csv(pd.io.common.StringIO("\n".join([HEADER, f"{corner[1]},{corner[0]},330,0.4,0.4,2016-08-01,912,N,VIIRS,n,1,290,5.0,N"])))
     feats = active_fire.detections_to_features(df, "VIIRS_SNPP_SP")
     assert len(feats) == 1 and feats[0]["properties"]["patch_id"]
+
+
+def test_low_confidence_detections_are_dropped(monkeypatch):
+    low = "37.12,-119.35,320.0,0.4,0.4,2016-08-01,1000,N,VIIRS,l,1,290.0,1.0,D"
+    fake_get(monkeypatch, "\n".join([HEADER] + ROWS + [low]))
+    fc = get_active_fires(start="2016-07-31", end="2016-08-01", source="VIIRS_SNPP_SP")
+    assert sorted(f["properties"]["confidence"] for f in fc["features"]) == ["h", "n"]
+
+
+def test_features_carry_data_kind_observed(monkeypatch):
+    fake_get(monkeypatch, "\n".join([HEADER] + ROWS))
+    fc = get_active_fires(start="2016-07-31", end="2016-08-01", source="VIIRS_SNPP_SP")
+    assert {f["properties"]["data_kind"] for f in fc["features"]} == {"observed"}
