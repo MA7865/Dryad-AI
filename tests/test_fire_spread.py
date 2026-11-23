@@ -8,11 +8,11 @@ from modules.fire_monitoring import simulate_fire_spread
 FIXTURE = Path(__file__).parent / "fixtures" / "fire_spread.json"
 START = (-119.4987, 37.0140)          # inside the Goose perimeter, near its western tip
 REQUIRED = {"feature_id", "patch_id", "layer_type", "observed_at", "generated_at",
-            "model_version", "source", "data_quality", "simulation_step", "perimeter_time"}
+            "model_version", "source", "data_quality", "data_kind", "simulation_step", "perimeter_time"}
 
 
 def run(**kw):
-    args = dict(ignition=START, target_area_km2=9.07, wind_toward_deg=92, wind_k=2.0, seed=0,
+    args = dict(ignition=START, target_area_km2=9.07, wind_dir_deg=272, wind_k=2.0, seed=0,
                 generated_at="2026-11-18T00:00:00Z")
     args.update(kw)
     return simulate_fire_spread(**args)
@@ -24,7 +24,7 @@ def test_collection_shape_and_required_fields():
     for f in fc["features"]:
         assert REQUIRED <= set(f["properties"])
         assert f["properties"]["layer_type"] == "fire_spread"
-        assert f["properties"]["data_quality"] == "simulated"
+        assert f["properties"]["data_kind"] == "simulated"
         assert f["properties"]["perimeter_time"] is None
         assert f["geometry"]["type"] == "Polygon"
 
@@ -67,3 +67,22 @@ def test_nonpositive_area_raises():
 def test_matches_saved_fixture():
     assert FIXTURE.exists(), "run scripts/make_fire_spread_fixture.py"
     assert json.loads(json.dumps(run())) == json.loads(FIXTURE.read_text())
+
+
+def test_wind_from_west_spreads_east_not_west():
+    """Team convention: wind_dir_deg is where the wind comes FROM. From the west -> fire moves east."""
+    fc = run(ignition=(-119.375, 37.10), wind_dir_deg=270, wind_k=3.0, target_area_km2=3.0)
+    import statistics
+    ign = [f for f in fc["features"] if f["properties"]["simulation_step"] == 0][0]
+    ign_col = int(ign["properties"]["patch_id"].split("_c")[1])
+    cols = [int(f["properties"]["patch_id"].split("_c")[1]) for f in fc["features"]]
+    assert statistics.mean(cols) > ign_col
+
+
+def test_wind_from_east_spreads_west():
+    fc = run(ignition=(-119.375, 37.10), wind_dir_deg=90, wind_k=3.0, target_area_km2=3.0)
+    import statistics
+    ign = [f for f in fc["features"] if f["properties"]["simulation_step"] == 0][0]
+    ign_col = int(ign["properties"]["patch_id"].split("_c")[1])
+    cols = [int(f["properties"]["patch_id"].split("_c")[1]) for f in fc["features"]]
+    assert statistics.mean(cols) < ign_col

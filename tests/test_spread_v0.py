@@ -148,3 +148,37 @@ def test_wind_from_the_west_beats_a_round_fire_on_an_east_west_oval():
     round_score = iou(circle_baseline(dom, start, target), real)
     wind_scores = [iou(simulate(dom, start, target, seed=s, wind_toward_deg=90, wind_k=3), real) for s in range(10)]
     assert np.mean(wind_scores) > round_score + 0.2
+
+
+# ---- Version 1b: wind that changes with the area burned -------------------------------------------
+
+def _domain_and_start():
+    from modules.fire_monitoring.spread_v0 import Domain
+    d = Domain(x0=0.0, y0=0.0, n_rows=200, n_cols=200)
+    return d, (9000.0, 9000.0)
+
+
+def test_constant_schedule_equals_static_wind():
+    from modules.fire_monitoring.spread_v0 import simulate
+    d, xy = _domain_and_start()
+    static = simulate(d, xy, 800, seed=3, wind_toward_deg=90, wind_k=2.0)
+    sched = simulate(d, xy, 800, seed=3, wind_schedule=[(90, 2.0)] * 12)
+    assert (static == sched).all()
+
+
+def test_schedule_still_burns_exactly_the_target_area():
+    from modules.fire_monitoring.spread_v0 import simulate
+    d, xy = _domain_and_start()
+    fire = simulate(d, xy, 800, seed=1, wind_schedule=[(90, 2.0)] * 6 + [(270, 2.0)] * 6)
+    assert int(fire.sum()) == 800
+
+
+def test_wind_that_turns_gives_a_different_fire_than_either_steady_wind():
+    from modules.fire_monitoring.spread_v0 import simulate
+    d, xy = _domain_and_start()
+    east = simulate(d, xy, 1500, seed=5, wind_schedule=[(90, 3.0)] * 8)
+    turn = simulate(d, xy, 1500, seed=5, wind_schedule=[(90, 3.0)] * 4 + [(270, 3.0)] * 4)
+    assert (east != turn).any()
+    cols_east = int(((east).nonzero()[1]).max()) - int(((east).nonzero()[1]).min())
+    cols_turn = int(((turn).nonzero()[1]).max()) - int(((turn).nonzero()[1]).min())
+    assert cols_turn != cols_east

@@ -22,6 +22,8 @@ GRID_PATH = Path(__file__).resolve().parents[2] / "data" / "grid.geojson"
 DEFAULT_SOURCE = "VIIRS_NOAA20_NRT"                   # live monitoring; use *_SP sources for history
 MODEL_VERSION = "m4-firms-0.1"
 LAYER_TYPE = "active_fire"
+DATA_KIND = "observed"
+KEEP_CONFIDENCE = ("n", "h")           # VIIRS confidence letters: keep nominal and high, drop low (shared rule with M3)
 
 
 @lru_cache(maxsize=1)
@@ -55,6 +57,13 @@ def to_iso_utc(acq_date, acq_time) -> str:
     return f"{acq_date}T{hhmm[:2]}:{hhmm[2:]}:00Z"
 
 
+def filter_confidence(df: pd.DataFrame) -> pd.DataFrame:
+    """Shared label/map rule: keep VIIRS 'n' (nominal) and 'h' (high) detections, drop 'l' (low)."""
+    if df.empty or "confidence" not in df:
+        return df
+    return df[df["confidence"].astype(str).str.lower().isin(KEEP_CONFIDENCE)]
+
+
 def detections_to_features(df: pd.DataFrame, source: str, generated_at: str = None) -> list:
     """Turn FIRMS rows into contract features, each tagged with the patch it falls in."""
     if df.empty:
@@ -84,7 +93,8 @@ def detections_to_features(df: pd.DataFrame, source: str, generated_at: str = No
                 "generated_at": generated_at,
                 "model_version": MODEL_VERSION,
                 "source": source,
-                "data_quality": "good",
+                "data_quality": "ok",
+                "data_kind": DATA_KIND,
                 "detection_id": det_id,
                 "confidence": str(r["confidence"]),
                 "detection_time": observed,
@@ -98,6 +108,7 @@ def detections_to_features(df: pd.DataFrame, source: str, generated_at: str = No
 
 def get_active_fires(bbox=STUDY_BBOX, start=None, end=None, source=DEFAULT_SOURCE) -> dict:
     """Active-fire detections (satellite thermal detections, NOT confirmed fires) as GeoJSON.
+    Low-confidence detections are dropped (see filter_confidence).
 
     bbox:   (west, south, east, north), must lie inside the study area.
     start, end: dates (or 'YYYY-MM-DD'), both included, UTC. Default: yesterday and today.
@@ -111,5 +122,5 @@ def get_active_fires(bbox=STUDY_BBOX, start=None, end=None, source=DEFAULT_SOURC
     if start > end:
         raise ValueError("start must not be after end")
 
-    df = fetch_detections(bbox, start, end, source)
+    df = filter_confidence(fetch_detections(bbox, start, end, source))
     return {"type": "FeatureCollection", "features": detections_to_features(df, source)}

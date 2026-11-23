@@ -13,11 +13,12 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 
-import geopandas as gpd
 import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from modules.fire_monitoring.active_fire import detections_to_features, filter_confidence  # noqa: E402
 
 WEST, SOUTH, EAST, NORTH = -119.50, 37.00, -119.25, 37.20   # docs/STUDY_AREA.md
 SOURCE = "VIIRS_SNPP_SP"            # source the Goose CSV was downloaded from
@@ -25,7 +26,7 @@ MODEL_VERSION = "m4-firms-0.1"
 FIXTURE_PER_DAY = 8                 # detections per date kept in the small fixture
 
 COMMON = ["feature_id", "patch_id", "layer_type", "observed_at", "generated_at",
-          "model_version", "source", "data_quality"]
+          "model_version", "source", "data_quality", "data_kind"]
 M4_REQUIRED = ["detection_id", "confidence", "detection_time", "satellite_source"]
 ISO_UTC = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
 
@@ -37,48 +38,14 @@ def to_iso_utc(acq_date, acq_time) -> str:
 
 
 def build_features(csv_path: Path, grid_path: Path) -> list:
+    """Same code path as get_active_fires: low-confidence dropped, features built by the module."""
     det = pd.read_csv(csv_path)
     if det.empty:
         sys.exit(f"{csv_path} has no detections.")
-    grid = gpd.read_file(grid_path)[["patch_id", "geometry"]]
-
-    pts = gpd.GeoDataFrame(
-        det, geometry=gpd.points_from_xy(det["longitude"], det["latitude"]), crs="EPSG:4326"
-    )
-    # Which cell is each point in? 'intersects' so points exactly on a cell edge still match;
-    # if two cells match, keep the first patch_id alphabetically so the result is repeatable.
-    joined = gpd.sjoin(pts, grid.sort_values("patch_id"), how="left", predicate="intersects")
-    joined = joined[~joined.index.duplicated(keep="first")]
-
-    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    features = []
-    for _, r in joined.sort_values(["acq_date", "acq_time", "latitude", "longitude"]).iterrows():
-        observed = to_iso_utc(r["acq_date"], r["acq_time"])
-        det_id = f"{SOURCE}_{observed.replace('-', '').replace(':', '')}_{r['latitude']:.5f}_{r['longitude']:.5f}"
-        patch = r["patch_id"] if isinstance(r["patch_id"], str) else None
-        features.append({
-            "type": "Feature",
-            "geometry": {"type": "Point",
-                         "coordinates": [round(float(r["longitude"]), 5), round(float(r["latitude"]), 5)]},
-            "properties": {
-                "feature_id": f"active_fire:{det_id}",
-                "patch_id": patch,
-                "layer_type": "active_fire",
-                "observed_at": observed,
-                "generated_at": generated_at,
-                "model_version": MODEL_VERSION,
-                "source": SOURCE,
-                "data_quality": "good",
-                "detection_id": det_id,
-                "confidence": str(r["confidence"]),
-                "detection_time": observed,
-                "satellite_source": SOURCE,
-                # extras beyond the required M4 properties (tell the team / add to DATA_DICTIONARY.md)
-                "frp_mw": float(r["frp"]) if "frp" in r and pd.notna(r["frp"]) else None,
-                "day_night": str(r["daynight"]) if "daynight" in r else None,
-            },
-        })
-    return features
+    det = filter_confidence(det)
+    if det.empty:
+        sys.exit("No detections left after the confidence filter.")
+    return detections_to_features(det, SOURCE)
 
 
 def validate(features: list) -> None:

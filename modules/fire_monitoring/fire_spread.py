@@ -3,7 +3,7 @@ fire_spread.py -- M4's shared function: run the spread simulation, return contra
 
     from modules.fire_monitoring import simulate_fire_spread
     fc = simulate_fire_spread((-119.505, 37.016), target_area_km2=9.07,
-                              wind_toward_deg=92, wind_k=2.0, seed=0)
+                              wind_dir_deg=272, wind_k=2.0, seed=0)
 
 Output is a SIMULATION, not an observation. One feature per 500 m patch the simulated fire reached.
 `simulation_step` is the step at which the fire first entered the patch. A step is NOT a unit of real
@@ -21,19 +21,21 @@ from . import spread_v0 as sv
 from .active_fire import STUDY_BBOX, load_grid
 
 LAYER_TYPE = "fire_spread"
+DATA_KIND = "simulated"
 MODEL_VERSION = "m4-spread-0.1"
 SOURCE = "simulation:ca-v1a"
 PATCH_AREA_M2 = 500.0 * 500.0
 
 
-def simulate_fire_spread(ignition, target_area_km2: float, wind_toward_deg: float = None,
+def simulate_fire_spread(ignition, target_area_km2: float, wind_dir_deg: float = None,
                          wind_k: float = 0.0, seed: int = 0, p: float = 0.4,
                          burn_steps: int = 3, generated_at: str = None) -> dict:
     """Simulate one fire and aggregate it to the shared 500 m patches.
 
     ignition:           (lon, lat) in EPSG:4326, inside the study area.
     target_area_km2:    final burned area the fire is grown to (e.g. 9.07 for Goose).
-    wind_toward_deg:    compass direction the wind blows TOWARD (0 = north, 90 = east); None = no wind.
+    wind_dir_deg:       direction the wind blows FROM (0 = north, 90 = east), the team convention;
+                        None = no wind. Converted to the "toward" direction used by the simulation here.
     wind_k:             wind strength (0 = none; 2 worked best on Goose; above 3 may hit the domain edge).
     seed:               random seed; the same inputs and seed always give the same output.
     """
@@ -49,8 +51,9 @@ def simulate_fire_spread(ignition, target_area_km2: float, wind_toward_deg: floa
     radius = math.sqrt(target_area_km2 * 1e6 / math.pi)
     domain = sv.make_domain(Point(ix, iy).buffer(2.5 * radius), (ix, iy), margin=500.0)
 
+    toward = None if wind_dir_deg is None else (float(wind_dir_deg) + 180.0) % 360.0
     burned, step_of = sv.simulate(domain, (ix, iy), target_cells, p=p, burn_steps=burn_steps, seed=seed,
-                                  wind_toward_deg=wind_toward_deg, wind_k=wind_k, return_steps=True)
+                                  wind_toward_deg=toward, wind_k=wind_k, return_steps=True)
 
     # Cells -> patches (a cell belongs to the patch that contains its centre).
     xs, ys = domain.centres()
@@ -77,7 +80,8 @@ def simulate_fire_spread(ignition, target_area_km2: float, wind_toward_deg: floa
                 "generated_at": generated_at,
                 "model_version": MODEL_VERSION,
                 "source": SOURCE,
-                "data_quality": "simulated",
+                "data_quality": "ok",
+                "data_kind": DATA_KIND,
                 "simulation_step": int(r["first"]),
                 "perimeter_time": None,
                 # share of the patch covered by simulated burned 90 m cells (approximate at the edges)
