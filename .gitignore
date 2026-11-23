@@ -2,6 +2,7 @@
 .env.*
 data/raw/
 .venv/
+.venv-old/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
@@ -10,3 +11,6 @@ data/grid_shp.zip
 .vscode/
 data/grid_shp/
 data/samples/validation/
+.venv-exp/
+data/cache/
+data/training/

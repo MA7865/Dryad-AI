@@ -6,56 +6,26 @@ All endpoints are under `/api/v1`. Responses are JSON. Map layers are GeoJSON Fe
 
 ## M1 - Forest health
 
-Data kind: **derived index from observed satellite data**. It is not a model prediction, and it has no probabilities.
+All map layers are GeoJSON FeatureCollections (EPSG:4326). Null means "not available" (never 0). The score is relative; it is not a probability and not a diagnosis.
 
-### GET /api/v1/layers/forest-health
-All 2,061 patches for the latest summer (currently 2026), for colouring the map.
+### GET /api/v1/layers/forest-health?period=summer|live
+- `summer` (default): latest full summer. `live`: latest 30-day satellite window plus the model score. While the live layer is first being computed the API returns 503 with a retry hint.
+- Properties (summer): `patch_id, row, col, center_lon, center_lat, year, period, health_index, health_band, ndvi, ndmi, trend_slope, trend_label, years_used, burn_status, burn_frac, forest_frac, data_quality, model_version, source, data_kind`.
+- Properties (live), in addition: `window_start, window_end, observed_at, n_scenes, obs_count, mortality_likelihood, mortality_percentile, mortality_band, model_status, mortality_model_version, mortality_model_window, mortality_climate_year`.
+- Colour by `health_band`, `trend_label`, or the continuous `mortality_likelihood` / `mortality_percentile`. Against Sierra-wide cutoffs most Shaver Lake patches are "Lower", so use the continuous value or the percentile for contrast. About 60% of patches are burned and not scored by the model (`model_status`).
 
-- **Inputs:** none.
-- **Response:** GeoJSON FeatureCollection. Each feature is the patch polygon with these properties: `patch_id`, `row`, `col`, `center_lon`, `center_lat`, `layer_type`, `year`, `period`, `observed_at`, `generated_at`, `model_version`, `source`, `data_kind`, `health_index`, `health_band`, `ndvi`, `ndmi`, `trend_slope`, `trend_label`, `years_used`, `burn_status`, `burn_frac`, `forest_frac`, `data_quality`. Field meanings are in `DATA_DICTIONARY.md`.
-- **Colour by:** `health_band`.
-- **Missing values:** `health_index`, `ndvi`, `ndmi` and `trend_slope` are `null` when `health_band` is "Not scored". Show "Data unavailable", not zero.
+### GET /api/v1/layers/forest-health/status
+Build times of the summer and live layers, live refresh state (`refreshing`, `error`, `age_minutes`) and the live window.
+
+### GET /api/v1/layers/forest-health/model-card
+Training data, evaluation, bands, calibration, feature importance, limitations. 404 if not built.
 
 ### GET /api/v1/patches/{patch_id}/forest-health
-Everything the click panel needs for one patch, including its score for each summer.
+Click-panel data: summer index, `history` (five summers), trend, and a `live` block (index for the live window plus `mortality_*` fields and notes). 404 for an unknown patch.
 
-- **Inputs:** `patch_id` in the path, for example `P_r000_c024`.
-- **Response 200:**
-```json
-{
-  "patch_id": "P_r000_c024",
-  "year": 2026,
-  "period": "2026-06-01/2026-09-30",
-  "health_index": 33,
-  "health_band": "Healthy",
-  "ndvi": 0.513,
-  "ndmi": -0.005,
-  "trend_label": "Stable vs peers",
-  "trend_slope": -0.7,
-  "burn_status": "unburned",
-  "data_quality": "good",
-  "explanation": "Greenness and moisture are within the normal range of unburned forest in this area (not among the lowest 30%). The score is relative to unburned forest in the Shaver Lake area, not an absolute measure of tree health.",
-  "model_version": "m1-index-v1",
-  "source": "Sentinel-2 SR Harmonized; ESA WorldCover v200; MODIS MCD64A1",
-  "data_kind": "derived_index",
-  "history": [
-    {"year": 2022, "health_index": 27, "health_band": "Healthy", "ndvi": 0.488, "ndmi": -0.02},
-    {"year": 2023, "health_index": 55, "health_band": "Healthy", "ndvi": 0.571, "ndmi": 0.086},
-    {"year": 2024, "health_index": 47, "health_band": "Healthy", "ndvi": 0.544, "ndmi": 0.054},
-    {"year": 2025, "health_index": 44, "health_band": "Healthy", "ndvi": 0.534, "ndmi": 0.049},
-    {"year": 2026, "health_index": 33, "health_band": "Healthy", "ndvi": 0.513, "ndmi": -0.005}
-  ]
-}
-```
-- **Response 404:** `{"detail": "Unknown patch_id: NOPE"}`
-- **Response 422:** standard FastAPI validation error.
-
-### Notes for the frontend
-- The score is **relative** to unburned forest in this area. Do not label it a probability or an absolute health measure.
-- "Post-fire recovery" means more than half the patch burned since 2015. The score reflects regrowth, not disease. Use a colour different from the stress colours.
-- Data is rebuilt offline (`python -m modules.forest_health.build_outputs`), so values change only when the outputs are regenerated.
-- Trend labels describe change relative to similar patches. They have not been shown to track surveyed damage, so do not present them as disease or decline warnings.
-findstr /s /i "<<FILL" docs\*.md
-git add docs
-git commit -m "M1: add USFS validation results to docs"
-git push
+Notes for the frontend:
+- `mortality_likelihood` is relative to surveyed Sierra forest, not a real-world probability; show the `model_note` text.
+- `model_status` is one of: scored, burned_not_scored, too_little_forest, missing_data, too_few_observations.
+- Climate inputs use the latest year TerraClimate has (`mortality_climate_year`); show it.
+- "Post-fire recovery" means more than half of the patch burned since 2015; it reflects regrowth, not disease. Use a colour different from the stress colours.
+- Trend labels are context only; do not present them as damage warnings.

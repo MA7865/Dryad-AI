@@ -22,15 +22,12 @@ import numpy as np
 import pandas as pd
 
 from .scoring import score_table
+from .paths import BOUNDS_FILE, CACHE, FEATURES, GRID, HISTORY, LATEST, ROOT, SAMPLE
 
-ROOT = Path(__file__).resolve().parents[2]
-FEATURES = ROOT / "data" / "processed" / "m1_features_2022_2026.csv"
-GRID = ROOT / "data" / "grid.geojson"
-BOUNDS_FILE = ROOT / "data" / "processed" / "m1_reference_bounds.json"
-OUT_TABLE = ROOT / "data" / "processed" / "m1_health_by_patch_year.csv"
-OUT_LATEST = ROOT / "data" / "processed" / "m1_forest_health_latest.geojson"
-OUT_HISTORY = ROOT / "data" / "processed" / "m1_patch_history.json"
-OUT_SAMPLE = ROOT / "data" / "samples" / "forest_health_sample.geojson"
+OUT_TABLE = CACHE / "m1_health_by_patch_year.csv"
+OUT_LATEST = LATEST
+OUT_HISTORY = HISTORY
+OUT_SAMPLE = SAMPLE
 
 MODEL_VERSION = "m1-index-v1"
 SOURCE = "Sentinel-2 SR Harmonized; ESA WorldCover v200; MODIS MCD64A1"
