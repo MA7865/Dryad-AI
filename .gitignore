@@ -9,3 +9,4 @@ __pycache__/
 data/grid_shp.zip
 .vscode/
 data/grid_shp/
+data/samples/validation/

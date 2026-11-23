@@ -38,7 +38,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 0,
     "perimeter_time": null,
     "burned_fraction": 0.324
@@ -81,7 +82,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 4,
     "perimeter_time": null,
     "burned_fraction": 0.713
@@ -124,7 +126,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 6,
     "perimeter_time": null,
     "burned_fraction": 0.065
@@ -167,7 +170,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 7,
     "perimeter_time": null,
     "burned_fraction": 0.454
@@ -210,7 +214,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 10,
     "perimeter_time": null,
     "burned_fraction": 1.0
@@ -253,7 +258,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 13,
     "perimeter_time": null,
     "burned_fraction": 0.68
@@ -296,7 +302,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 14,
     "perimeter_time": null,
     "burned_fraction": 0.68
@@ -339,7 +346,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 17,
     "perimeter_time": null,
     "burned_fraction": 0.907
@@ -382,7 +390,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 20,
     "perimeter_time": null,
     "burned_fraction": 0.842
@@ -425,7 +434,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 26,
     "perimeter_time": null,
     "burned_fraction": 0.907
@@ -468,7 +478,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 26,
     "perimeter_time": null,
     "burned_fraction": 0.842
@@ -511,7 +522,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 27,
     "perimeter_time": null,
     "burned_fraction": 0.745
@@ -554,7 +566,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 27,
     "perimeter_time": null,
     "burned_fraction": 0.94
@@ -597,7 +610,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 28,
     "perimeter_time": null,
     "burned_fraction": 0.356
@@ -640,7 +654,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 33,
     "perimeter_time": null,
     "burned_fraction": 1.0
@@ -683,7 +698,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 33,
     "perimeter_time": null,
     "burned_fraction": 0.194
@@ -726,7 +742,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 34,
     "perimeter_time": null,
     "burned_fraction": 0.972
@@ -769,7 +786,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 35,
     "perimeter_time": null,
     "burned_fraction": 1.0
@@ -812,7 +830,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 35,
     "perimeter_time": null,
     "burned_fraction": 0.551
@@ -855,7 +874,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 35,
     "perimeter_time": null,
     "burned_fraction": 0.648
@@ -898,7 +918,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 39,
     "perimeter_time": null,
     "burned_fraction": 0.778
@@ -941,7 +962,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 39,
     "perimeter_time": null,
     "burned_fraction": 1.0
@@ -984,7 +1006,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 41,
     "perimeter_time": null,
     "burned_fraction": 0.972
@@ -1027,7 +1050,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 41,
     "perimeter_time": null,
     "burned_fraction": 0.713
@@ -1070,7 +1094,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 42,
     "perimeter_time": null,
     "burned_fraction": 0.94
@@ -1113,7 +1138,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 45,
     "perimeter_time": null,
     "burned_fraction": 0.81
@@ -1156,7 +1182,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 45,
     "perimeter_time": null,
     "burned_fraction": 0.227
@@ -1199,7 +1226,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 45,
     "perimeter_time": null,
     "burned_fraction": 1.0
@@ -1242,7 +1270,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 45,
     "perimeter_time": null,
     "burned_fraction": 0.454
@@ -1285,7 +1314,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 45,
     "perimeter_time": null,
     "burned_fraction": 0.551
@@ -1328,7 +1358,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 47,
     "perimeter_time": null,
     "burned_fraction": 0.907
@@ -1371,7 +1402,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 47,
     "perimeter_time": null,
     "burned_fraction": 1.0
@@ -1414,7 +1446,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 47,
     "perimeter_time": null,
     "burned_fraction": 1.0
@@ -1457,7 +1490,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 49,
     "perimeter_time": null,
     "burned_fraction": 0.81
@@ -1500,7 +1534,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 49,
     "perimeter_time": null,
     "burned_fraction": 0.713
@@ -1543,7 +1578,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 52,
     "perimeter_time": null,
     "burned_fraction": 0.875
@@ -1586,7 +1622,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 53,
     "perimeter_time": null,
     "burned_fraction": 0.81
@@ -1629,7 +1666,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 54,
     "perimeter_time": null,
     "burned_fraction": 0.94
@@ -1672,7 +1710,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 54,
     "perimeter_time": null,
     "burned_fraction": 0.616
@@ -1715,7 +1754,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 54,
     "perimeter_time": null,
     "burned_fraction": 0.907
@@ -1758,7 +1798,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 56,
     "perimeter_time": null,
     "burned_fraction": 0.907
@@ -1801,7 +1842,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 57,
     "perimeter_time": null,
     "burned_fraction": 0.875
@@ -1844,7 +1886,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 57,
     "perimeter_time": null,
     "burned_fraction": 0.745
@@ -1887,7 +1930,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 60,
     "perimeter_time": null,
     "burned_fraction": 0.292
@@ -1930,7 +1974,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 60,
     "perimeter_time": null,
     "burned_fraction": 0.616
@@ -1973,7 +2018,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 61,
     "perimeter_time": null,
     "burned_fraction": 0.454
@@ -2016,7 +2062,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 61,
     "perimeter_time": null,
     "burned_fraction": 0.032
@@ -2059,7 +2106,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 61,
     "perimeter_time": null,
     "burned_fraction": 0.421
@@ -2102,7 +2150,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 62,
     "perimeter_time": null,
     "burned_fraction": 0.324
@@ -2145,7 +2194,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 63,
     "perimeter_time": null,
     "burned_fraction": 0.065
@@ -2188,7 +2238,8 @@
     "generated_at": "2026-11-18T00:00:00Z",
     "model_version": "m4-spread-0.1",
     "source": "simulation:ca-v1a",
-    "data_quality": "simulated",
+    "data_quality": "ok",
+    "data_kind": "simulated",
     "simulation_step": 64,
     "perimeter_time": null,
     "burned_fraction": 0.065
