@@ -1,19 +1,30 @@
 
+"""
+M2 Sentinel-2 satellite diagnostic.
+
+Reusable cloud masking and vegetation-index
+functions are safe to import.
+
+Earth Engine is initialized only when this
+script is explicitly run.
+"""
+
 import os
+
 import ee
 
-PROJECT = os.environ["EE_PROJECT"]
 
-ee.Initialize(project=PROJECT)
+# Shaver Lake study area
+BOUNDS = [-119.50, 37.00, -119.25, 37.20]
 
-# Shaver Lake study-area boundary
-aoi = ee.Geometry.Rectangle([
-    -119.50, 37.00,
-    -119.25, 37.20
-])
+START_DATE = "2026-06-01"
+END_DATE = "2026-09-01"
 
-# Same cloud-masking approach as M1
+DATASET = "COPERNICUS/S2_SR_HARMONIZED"
+
+
 def mask_clouds(img):
+    """Mask the same SCL classes as the original M2 script."""
     scl = img.select("SCL")
 
     clear = (
@@ -27,8 +38,8 @@ def mask_clouds(img):
     return img.updateMask(clear)
 
 
-# Same indices as M1
 def add_indices(img):
+    """Add NDVI and NDMI bands."""
     ndvi = img.normalizedDifference(
         ["B8", "B4"]
     ).rename("NDVI")
@@ -40,36 +51,61 @@ def add_indices(img):
     return img.addBands([ndvi, ndmi])
 
 
-collection = (
-    ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED")
-    .filterBounds(aoi)
-    .filterDate("2026-06-01", "2026-09-01")
-    .filter(
-        ee.Filter.lt(
-            "CLOUDY_PIXEL_PERCENTAGE", 60
+def initialize_gee():
+    """Initialize Earth Engine using M2's project."""
+    project = os.environ.get("EE_PROJECT")
+
+    if not project:
+        raise RuntimeError(
+            "EE_PROJECT is not configured. "
+            "Set it before running Earth Engine scripts."
+        )
+
+    ee.Initialize(project=project)
+
+
+def main():
+    initialize_gee()
+
+    aoi = ee.Geometry.Rectangle(BOUNDS)
+
+    collection = (
+        ee.ImageCollection(DATASET)
+        .filterBounds(aoi)
+        .filterDate(START_DATE, END_DATE)
+        .filter(
+            ee.Filter.lt(
+                "CLOUDY_PIXEL_PERCENTAGE", 60
+            )
         )
     )
-)
 
-processed = collection.map(mask_clouds).map(add_indices)
+    processed = (
+        collection
+        .map(mask_clouds)
+        .map(add_indices)
+    )
 
-composite = processed.select(
-    ["NDVI", "NDMI"]
-).median()
+    composite = processed.select(
+        ["NDVI", "NDMI"]
+    ).median()
 
-# A sample point inside the study area
-sample_point = ee.Geometry.Point([
-    -119.40, 37.10
-])
+    sample_point = ee.Geometry.Point([
+        -119.40, 37.10
+    ])
 
-sample = composite.reduceRegion(
-    reducer=ee.Reducer.first(),
-    geometry=sample_point,
-    scale=20,
-    maxPixels=10000
-).getInfo()
+    sample = composite.reduceRegion(
+        reducer=ee.Reducer.first(),
+        geometry=sample_point,
+        scale=20,
+        maxPixels=10000,
+    ).getInfo()
 
-print("Images:", collection.size().getInfo())
-print("Sample coordinates:", [-119.40, 37.10])
-print("NDVI:", sample.get("NDVI"))
-print("NDMI:", sample.get("NDMI"))
+    print("Images:", collection.size().getInfo())
+    print("Sample coordinates:", [-119.40, 37.10])
+    print("NDVI:", sample.get("NDVI"))
+    print("NDMI:", sample.get("NDMI"))
+
+
+if __name__ == "__main__":
+    main()
