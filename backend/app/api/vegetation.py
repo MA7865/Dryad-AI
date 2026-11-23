@@ -2,46 +2,64 @@
 """
 M2 Vegetation Intelligence API.
 
-Serves the precomputed vegetation GeoJSON.
+Serves validated, precomputed GeoJSON.
+Does not run GEE during API requests.
 """
 
 from fastapi import APIRouter, HTTPException, Query
 
-from modules.vegetation.vegetation import predict_vegetation
-
-router = APIRouter(
-    prefix="/api/v1",
-    tags=["Vegetation"]
+from backend.app.schemas.vegetation import (
+    VegetationFeatureCollection,
+)
+from modules.vegetation.vegetation import (
+    predict_vegetation,
 )
 
 
-@router.get("/layers/vegetation")
+router = APIRouter(
+    prefix="/api/v1",
+    tags=["Vegetation"],
+)
+
+
+@router.get(
+    "/layers/vegetation",
+    response_model=VegetationFeatureCollection,
+    summary="Get vegetation and anomaly layer",
+)
 def get_vegetation_layer(
-    patch_id: list[str] | None = Query(default=None),
-    as_of: str | None = None
+    patch_id: list[str] | None = Query(
+        default=None,
+        description="Optional repeated patch ID filter",
+    ),
+    as_of: str | None = Query(
+        default=None,
+        description="Currently supports 2026 only",
+    ),
 ):
     """
-    Return vegetation and anomaly data.
+    Return LANDFIRE vegetation classifications,
+    satellite measurements, burn context and
+    exploratory statistical anomaly results.
 
-    Optional filters:
-      patch_id: One or more patch IDs.
-      as_of: Currently supports 2026 only.
+    Repeated patch_id parameters select multiple patches.
+    Missing detection results are returned as null.
     """
 
     try:
         return predict_vegetation(
             patch_ids=patch_id,
-            as_of=as_of
+            as_of=as_of,
         )
 
     except FileNotFoundError as error:
         raise HTTPException(
             status_code=503,
-            detail=str(error)
+            detail=str(error),
         ) from error
 
     except ValueError as error:
         raise HTTPException(
             status_code=400,
-            detail=str(error)
+            detail=str(error),
         ) from error
