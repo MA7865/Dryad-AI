@@ -1,5 +1,13 @@
 # AI Forest Sentinel — Frontend Product Specification
 
+## M1 msg
+M1 is ready on branch m1/forest-health (docs: docs/module_readiness/m1.md, API_CONTRACT.md, M1_MODEL_CARD.md).
+Endpoints: /api/v1/layers/forest-health?period=summer|live, /status, /model-card, /api/v1/patches/{patch_id}/forest-health. Try them at /docs.
+- Colour the mortality layer by mortality_percentile or mortality_likelihood, not the band: every Shaver patch is "Lower" on the Sierra-wide scale. Say "rank within Shaver Lake" in the legend.
+- About 60% of patches are burned and not scored by the model: show grey and the reason in model_status.
+- Trend labels are context only (not a damage warning). Show the climate year (mortality_climate_year) and the model_note text.
+- The API has no CORS setup. If the UI runs on another origin we need CORSMiddleware in backend/app/main.py: who owns that file?
+
 ## 1. Product overview
 
 Build a polished, responsive web application called **AI Forest Sentinel**, an AI-assisted forest monitoring and wildfire decision-support prototype for a selected study region in California's Sierra Nevada.
