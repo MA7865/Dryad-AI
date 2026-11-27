@@ -23,7 +23,7 @@ Details: `docs/M1_MODEL_CARD.md`. Labels: USFS mortality polygons (15,457, 2021-
 - The condition index does not flag surveyed damage (AUC 0.18 in the small Shaver box); the 5-summer trend is weak (AUC 0.54 / 0.61). Treat both as context.
 - Climate inputs use the latest year TerraClimate has (2024); the API reports it.
 - Prithvi-EO-2.0 loads and runs fast; no comparison was run.
-
+- Terrain and climate alone nearly match the full model. In whole-block testing, satellite features add about +0.01 AUC (0.764 to 0.776; interval +0.008 to +0.016). In the strictest test (new places and a new year; 2,049 patches, 364 damaged) the two models cannot be told apart (0.72 environment-only vs 0.68 with satellite; difference interval -0.09 to +0.02), and the sign changed between two software environments, so no satellite gain is claimed there.
 ## 3. What you can reuse
 
 | Piece | Where | Use |
