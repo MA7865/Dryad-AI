@@ -54,3 +54,28 @@ def test_model_card_endpoint():
     assert r.status_code in (200, 404)
     if r.status_code == 200:
         assert "evaluation" in r.json()
+
+@needs_summer
+def test_timeline_has_frames_and_all_patches():
+    r = client.get("/api/v1/layers/forest-health/timeline")
+    assert r.status_code == 200
+    body = r.json()
+    assert len(body["frames"]) >= 5
+    assert len(body["patches"]) == 2061
+    assert len(body["patches"]["P_r000_c024"]["health_index"]) == len(body["frames"])
+
+
+@needs_summer
+def test_layer_for_a_past_year():
+    r = client.get("/api/v1/layers/forest-health?year=2023")
+    assert r.status_code == 200
+    feats = r.json()["features"]
+    assert len(feats) == 2061 and feats[0]["properties"]["year"] == 2023
+    assert client.get("/api/v1/layers/forest-health?year=2005").status_code == 404
+
+
+@needs_summer
+def test_patch_timeline():
+    r = client.get("/api/v1/patches/P_r000_c024/forest-health/timeline")
+    assert r.status_code == 200 and "frames" in r.json()
+    assert client.get("/api/v1/patches/NOPE/forest-health/timeline").status_code == 404

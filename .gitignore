@@ -14,3 +14,4 @@ data/samples/validation/
 .venv-exp/
 data/cache/
 data/training/
+frontend_snapshot/

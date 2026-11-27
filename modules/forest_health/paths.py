@@ -17,3 +17,6 @@ LIVE_META = CACHE / "m1_live_meta.json"
 
 MODEL_FILE = ROOT / "models" / "m1_mortality_hgb.joblib"
 MODEL_CARD = CONFIG / "m1_model_card.json"
+
+MORTALITY_HISTORY = CONFIG / "m1_mortality_history.json"
+SEASONAL_HISTORY = CONFIG / "m1_seasonal_history.json"

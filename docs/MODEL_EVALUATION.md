@@ -20,10 +20,11 @@ USFS polygons are the only independent labels. The Sierra Nevada has 15,457 poly
 ### Results (full tables: docs/M1_MODEL_CARD.md)
 - Whole blocks held out: AUC 0.78 (95% 0.77-0.80); top 10% flagged: 69% damaged versus 25% overall.
 - By year: AUC 0.72 (2021), 0.77 (2022), 0.80 (2023), 0.79 (2024).
-- Strictest test (new blocks and 2024): AUC about 0.73; the satellite gain over environment-only is not demonstrable (interval includes 0).
+- Terrain and climate alone nearly match the full model. In whole-block testing, satellite features add about +0.01 AUC (0.764 to 0.776; interval +0.008 to +0.016). In the strictest test (new places and a new year; 2,049 patches, 364 damaged) the two models cannot be told apart (0.72 environment-only vs 0.68 with satellite; difference interval -0.09 to +0.02), and the sign changed between two software environments, so no satellite gain is claimed there.
 - Shaver Lake, never seen: AUC 0.71 (683 patches, 99 damaged).
 - Calibration within about 0.02 per decile. Bands: High = 10% of patches with 69% damaged; High + Elevated = 30% of patches, about 50% damaged, catching about 60% of mapped damage.
 - Importance: elevation, climatic water deficit and tree cover dominate; satellite features add about +0.01 AUC.
+- At Shaver Lake the mean predicted likelihood for labelled patch-years was 0.154 against an observed damage rate of 0.145, and observed damage rose across thirds of the score (2.6%, 16.7%, 24.1%). Year-level intensity is not captured: 2021 and 2024 were over-predicted (0.17 vs 0.03 and 0.07 vs 0.01) and 2023 under-predicted (0.13 vs 0.19). Use the model to rank patches, not to forecast how much damage a given year will bring.
 
 ### Other checks
 - Condition index: AUC 0.18 against the 22 Shaver polygons (damaged patches are denser, greener forest), so it is described as relative greenness, not damage.
