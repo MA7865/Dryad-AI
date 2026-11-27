@@ -15,3 +15,6 @@ data/samples/validation/
 data/cache/
 data/training/
 frontend_snapshot/
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
